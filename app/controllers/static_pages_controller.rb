@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-before_filter :authorize
+before_filter :authorize, only: [:prototype]
 
   def home
   end
@@ -8,5 +8,20 @@ before_filter :authorize
   end
 
   def about
+  end
+
+  def investors
+  end
+
+  def faq
+  end
+
+  def follow
+  end
+
+  def prototype
+  end
+
+  def jobs
   end
 end

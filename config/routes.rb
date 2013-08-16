@@ -6,12 +6,16 @@ SampleApp::Application.routes.draw do
   resources :users
   resources :sessions
 
-  root to: 'users#new'
+  root to: 'static_pages#home'
 
   get "static_pages/home"
-  get "static_pages/help"
-  get "static_pages/about"
-
+  get 'help', to: "static_pages#help"
+  get "about", to: 'static_pages#about'
+  get 'jobs', to: "static_pages#jobs"
+  get  'investors', to: "static_pages#investors"
+  get 'faq', to: "static_pages#faq"
+  get 'follow', to: "static_pages#follow"
+  get 'prototype', to: "static_pages#prototype"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

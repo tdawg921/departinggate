@@ -1,9 +1,78 @@
 <% provide(:title, 'Home') %>
-<!DOCTYPE html>
 
-<h1>Sample App</h1>
-<p>This is the home page for the <a href="http://railstutorial.org/">
-Ruby on Rails Tutorial</a> sample application. 
-</p>
+    <!--<link rel="stylesheet" href="https://djyhxgczejc94.cloudfront.net/builds/80037b02082b29f5f9cea127cab2a4ba4365ec67.css">-->
+    <script src="https://app.divshot.com/js/jquery.min.js"></script>
+    <script src="https://app.divshot.com/js/bootstrap.min.js"></script>
+  </head>
 
+  <body>
+       <!-- Carousel
+	      ================================================== -->
+	      <div id="myCarousel" class="carousel slide">
+	        <div class="carousel-inner">
+	          <div class="item active">
+	          	<%= image_tag "DSC_2186.jpg" %>
+	            <div class="container">
+	              <div class="carousel-caption">
+	                <h1>Your Trip. Your Way.</h1>
+                    <br />
+                    <br />
+                    <br />
+	                <p class="lead">Don't be bound by a destination.</p>
+	                <a class="btn btn-large btn-primary" data-toggle="modal" href="#myModal">Subscribe to our mailing list</a>
+	              </div>
+	            </div>
+	          </div>
+	          <div class="item">
+	          	<%= image_tag "IMG_0074.jpg" %>
+	            <div class="container">
+	              <div class="carousel-caption">
+	                <h1>A new way to search</h1>
+                    <br />
+                    <br />
+                    <br />
+	                <p class="lead">Specify your activities, region, and budget. Provide as much or as little detail as you'd like. We'll find some fun places for you to go.</p>
+	                <a class="btn btn-large btn-primary" href="about.shtml">Learn More</a>
+	              </div>
+	            </div>
+	          </div>
+	          <div class="item">
+	          	<%= image_tag "DSC_2149.jpg" %>
+	            <div class="container">
+	              <div class="carousel-caption">
+	                <h1>Questions?</h1>
+	                <p class="lead">We promise, this is going to be great. Still doubt us? See if our FAQs help answer your questions. If not, drop us a line using the box in the bottom right. We'll be happy to put your mind at ease.</p>
+                    <a class="btn btn-large btn-primary" href="faq.shtml">View the FAQs</a>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	    <!-- Carousel nav -->
+        <a class="carousel-control left active" href="#myCarousel" data-slide="prev">&#8249</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&#8250</a>
+      </div>
+      <div class ="container marketing">
+		  <div class="row main-features">
+			<div class="span4">
+			  <div class="well">
+				<h3>Budget Wisely</h3>
+				<p>With DepartingGate, you aren't tied to your destination. We let you plan based on budget, activity, region, and more. Not picky? Then you can search as broadly as you want. We're here to make travel planning as easy as possible. </p>
+				<a class="btn btn-primary" href="about.shtml"><span class="btn-label">Find Out How</span></a>
+			  </div>
+			</div>
+			<div class="span4">
+			  <div class="well">
+				<h3>Curated Results</h3>
+				<p>We don't just let you see an itinerary - we'll package results for you to create a complete destination package. It's interactive - tweak as much as you want, or simply select and go. We'll let you book the whole package.</p>
+				<a class="btn btn-info" href="#"><span class="btn-label">Find Out More</span></a>
+			  </div>
+			</div>
+			<div class="span4">
+			  <div class="well">
+				<h3>Explore Now</h3>
+				<p>We're busy putting together a great application, but it's not quite ready yet. In the meantime, take a look at our prototype. It's constantly updating, so your results may vary. Any feedback is welcome!</p>
+				<a class="btn btn-success" href="#"><span class="btn-label">Check It Out</span></a>
+			  </div>
+			</div>
+		  </div>
 
