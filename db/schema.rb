@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130817033605) do
+ActiveRecord::Schema.define(:version => 0) do
 
   create_table "address", :primary_key => "Address_ID", :force => true do |t|
     t.string  "Street_1", :limit => 100
@@ -81,8 +81,16 @@ ActiveRecord::Schema.define(:version => 20130817033605) do
   end
 
   create_table "ref_airport", :primary_key => "Airport_Code", :force => true do |t|
-    t.string "Airport_Name_Dsc",               :null => false
-    t.string "City_Code",        :limit => 45
+    t.string  "Airport_Name_Dsc",               :null => false
+    t.string  "City_Code",        :limit => 45
+    t.string  "code"
+    t.string  "name"
+    t.string  "city"
+    t.string  "state"
+    t.string  "latitude"
+    t.string  "longitude"
+    t.integer "id"
+    t.integer "zip"
   end
 
   add_index "ref_airport", ["Airport_Code"], :name => "Airport_Code_UNIQUE", :unique => true
@@ -184,12 +192,5 @@ ActiveRecord::Schema.define(:version => 20130817033605) do
   add_index "user_data", ["Home_Airport"], :name => "fk_Home_airport_idx"
   add_index "user_data", ["Name_ID"], :name => "fk_Name_ID_idx"
   add_index "user_data", ["Party_Group_ID"], :name => "fk_User_data_Party_Group_ID_idx"
-
-  create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
 
 end
