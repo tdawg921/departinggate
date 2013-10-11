@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130905235739) do
 
   create_table "address", :primary_key => "Address_ID", :force => true do |t|
     t.string  "Street_1", :limit => 100
@@ -57,11 +57,13 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "booked_trip", ["session_ID"], :name => "Booked_Session_ID_idx"
 
   create_table "city_vacation_type_xref", :primary_key => "ID", :force => true do |t|
-    t.string "City_Code",     :limit => 10, :null => false
-    t.string "Vacation_Type", :limit => 45, :null => false
+    t.integer "City_Code",     :null => false
+    t.integer "Vacation_Type", :null => false
+    t.integer "rating"
   end
 
-  add_index "city_vacation_type_xref", ["Vacation_Type"], :name => "FK_Vacation_Code_idx"
+  add_index "city_vacation_type_xref", ["City_Code"], :name => "fk_city_idx"
+  add_index "city_vacation_type_xref", ["Vacation_Type"], :name => "fk_type_idx"
 
   create_table "name_demographic", :primary_key => "Name_ID", :force => true do |t|
     t.integer "User_ID"
@@ -80,31 +82,32 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer "Name_ID"
   end
 
-  create_table "ref_airport", :primary_key => "Airport_Code", :force => true do |t|
-    t.string  "Airport_Name_Dsc",               :null => false
-    t.string  "City_Code",        :limit => 45
+  create_table "ref_airport", :force => true do |t|
+    t.string  "name",      :null => false
     t.string  "code"
-    t.string  "name"
-    t.string  "city"
-    t.string  "state"
     t.string  "latitude"
     t.string  "longitude"
-    t.integer "id"
+    t.string  "city"
+    t.string  "state"
     t.integer "zip"
   end
 
-  add_index "ref_airport", ["Airport_Code"], :name => "Airport_Code_UNIQUE", :unique => true
-  add_index "ref_airport", ["City_Code"], :name => "FK_City_Code_idx"
+  add_index "ref_airport", ["id"], :name => "id_UNIQUE", :unique => true
 
-  create_table "ref_city_region", :primary_key => "City_Code", :force => true do |t|
-    t.string "City",                  :limit => 100, :null => false
-    t.string "State",                 :limit => 2,   :null => false
-    t.string "Country",               :limit => 45,  :null => false
-    t.string "Region_Code_Primary",   :limit => 10,  :null => false
-    t.string "Region_Code_Secondary", :limit => 45
+  create_table "ref_city", :force => true do |t|
+    t.string "city_name"
+    t.string "state"
+    t.string "city_state"
   end
 
-  add_index "ref_city_region", ["Region_Code_Primary"], :name => "FK_Region_Primary_idx"
+  create_table "ref_city_region", :force => true do |t|
+    t.integer "ref_city_id"
+    t.integer "ref_region_id"
+    t.integer "rating"
+  end
+
+  add_index "ref_city_region", ["ref_city_id"], :name => "fk_city_idx"
+  add_index "ref_city_region", ["ref_region_id"], :name => "fk_region_idx"
 
   create_table "ref_region", :primary_key => "Region_Code", :force => true do |t|
     t.string "Region_Description", :limit => 45, :null => false
@@ -164,6 +167,14 @@ ActiveRecord::Schema.define(:version => 0) do
 
   add_index "search_session_results", ["Search_ID"], :name => "Session_Search_idx"
 
+  create_table "searches", :force => true do |t|
+    t.integer  "region_id"
+    t.integer  "vacation_id"
+    t.string   "destination"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "session_user_xref", :primary_key => "Session_ID", :force => true do |t|
     t.integer "User_ID", :null => false
   end
@@ -192,5 +203,12 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "user_data", ["Home_Airport"], :name => "fk_Home_airport_idx"
   add_index "user_data", ["Name_ID"], :name => "fk_Name_ID_idx"
   add_index "user_data", ["Party_Group_ID"], :name => "fk_User_data_Party_Group_ID_idx"
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
 end

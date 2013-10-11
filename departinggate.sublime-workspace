@@ -1,0 +1,584 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"nam",
+				"city_name"
+			],
+			[
+				"f",
+				"fet	fetch(name) { |key| .. }"
+			],
+			[
+				"fin",
+				"find_each"
+			],
+			[
+				"cl",
+				"cla	class .. initialize .. end"
+			],
+			[
+				"c",
+				"cla	Create functional test class"
+			],
+			[
+				"Ct",
+				"CityRegion"
+			],
+			[
+				"City",
+				"CityRegion"
+			],
+			[
+				"find",
+				"find_city_vacations"
+			],
+			[
+				"find_city",
+				"find_city_regions"
+			],
+			[
+				"Vacation",
+				"Vacation_Type_Code"
+			],
+			[
+				"Vaca",
+				"Vacation_Type_Code"
+			],
+			[
+				"po",
+				"postgresql"
+			],
+			[
+				"img",
+				"image_tag"
+			],
+			[
+				"lin",
+				"link_to"
+			],
+			[
+				"st",
+				"static_pages"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/models/search.rb",
+			"settings":
+			{
+				"buffer_size": 614,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "script/cities.rb",
+			"settings":
+			{
+				"buffer_size": 419,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/searches/show.html.erb",
+			"settings":
+			{
+				"buffer_size": 55,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/region.rb",
+			"settings":
+			{
+				"buffer_size": 177,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/city_regions/_city_region.html.erb",
+			"settings":
+			{
+				"buffer_size": 67,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/city_region.rb",
+			"settings":
+			{
+				"buffer_size": 212,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/city.rb",
+			"settings":
+			{
+				"buffer_size": 236,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/layouts/application.html.erb",
+			"settings":
+			{
+				"buffer_size": 687,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Ruby/Ruby.sublime-build",
+	"command_palette":
+	{
+		"height": 354.0,
+		"selected_items":
+		[
+			[
+				"",
+				"About"
+			]
+		],
+		"width": 472.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/rails/departinggate/app/views/cities/_city.html.erb",
+		"/C/rails/departinggate/app/views/searches/show.html.erb",
+		"/C/rails/departinggate/app/controllers/searches_controller.rb",
+		"/C/rails/departinggate/app/views/cities/show.html.erb",
+		"/C/rails/departinggate/app/views/city_regions/show.html.erb",
+		"/C/rails/departinggate/app/views/city_regions/_city.html.erb",
+		"/C/rails/departinggate/app/views/searches/new.html.erb",
+		"/C/rails/departinggate/app/views/cities/_cities.html.erb",
+		"/C/rails/departinggate/app/models/region.rb",
+		"/C/rails/sample_app/config/routes.rb",
+		"/C/rails/departinggate/app/models/user.rb",
+		"/C/rails/departinggate/db/migrate/20130804165954_create_users.rb",
+		"/C/rails/departinggate/db/migrate/20130818233744_airports.rb",
+		"/C/rails/departinggate/app/models/vacation.rb",
+		"/C/rails/departinggate/app/models/city.rb",
+		"/C/rails/departinggate/Gemfile",
+		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/layouts/application.html.erb",
+		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/products/_product.html.erb",
+		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/products/index.html.erb",
+		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/searches/show.html.erb",
+		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/searches/new.html.erb",
+		"/C/rails/sample_app/app/views/layouts/application.html.erb",
+		"/C/rails/departinggate/app/controllers/application_controller.rb",
+		"/C/rails/departinggate/config/routes.rb",
+		"/C/rails/departinggate/db/migrate/20130829000105_ref_city_region.rb",
+		"/C/rails/departinggate/db/migrate/20130829001706_ref_city_fk.rb",
+		"/C/rails/departinggate/db/migrate/20130829234612_city_vacation.rb",
+		"/C/rails/departinggate/db/migrate/20130828232306_ref_city.rb",
+		"/C/Documents/MYSQLDumps/Dump20130826/dg_development_ref_airport.sql",
+		"/C/rails/departinggate/db/seeds.rb",
+		"/C/rails/departinggate/db/migrate/20130817033605_schema.rb",
+		"/C/rails/departinggate/db/schema.rb",
+		"/C/rails/departinggate/config/database.yml",
+		"/C/rails/mysql_test/config/database.yml",
+		"/C/rails/mysql_test/Gemfile",
+		"/C/rails/mysql_test/app/controllers/ids_controller.rb",
+		"/C/rails/mysql_test/app/controllers/application_controller.rb",
+		"/C/rails/mysql_test/app/views/ids/new.html.erb",
+		"/C/rails/mysql_test/app/views/products/index.html.erb",
+		"/C/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/mysql2-0.3.11-x86-mingw32/lib/mysql2/version.rb",
+		"/C/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/mysql2-0.3.11-x86-mingw32/lib/mysql2/mysql2.rb",
+		"/C/rails/sample_app/app/controllers/static_pages_controller.rb",
+		"/C/rails/departinggate/app/controllers/static_pages_controller.rb",
+		"/C/Source/Web/Development/prototype/root.shtml",
+		"/C/rails/sample_app/app/views/static_pages/prototype.html.erb",
+		"/C/Documents/travel_data.sql",
+		"/C/rails/departinggate/config/environment.rb",
+		"/C/rails/departinggate/db/migrate/20130815233325_initial_structure.rb",
+		"/C/rails/departinggate/db/development.sqlite3",
+		"/C/rails/departinggate/README.md",
+		"/C/rails/departinggate/app/controllers/users_controller.rb",
+		"/C/rails/sample_app/app/views/users/new.html.erb",
+		"/C/rails/sample_app/app/views/static_pages/home.html.erb",
+		"/C/Source/Web/Development/index.shtml",
+		"/C/rails/sample_app/app/assets/javascripts/jquery-1.9.1.js",
+		"/C/rails/sample_app/app/assets/javascripts/jquery-ui.js",
+		"/C/rails/sample_app/app/assets/images/DSC_2186.JPG",
+		"/C/rails/sample_app/app/views/sessions/new.html.erb",
+		"/C/rails/sample_app/app/assets/stylesheets/navbar.css",
+		"/C/rails/sample_app/app/views/navbar.html.erb",
+		"/C/rails/sample_app/app/assets/stylesheets/static_pages.css.scss",
+		"/C/rails/sample_app/app/assets/stylesheets/application.css",
+		"/C/rails/sample_app/app/assets/stylesheets/sessions.css.scss",
+		"/C/rails/sample_app/app/views/static_pages/job.html.erb",
+		"/C/rails/sample_app/app/views/static_pages/faq.html.erb",
+		"/C/rails/sample_app/app/views/static_pages/follow.html.erb",
+		"/C/rails/sample_app/app/controllers/application_controller.rb",
+		"/C/rails/sample_app/app/controllers/users_controller.rb",
+		"/C/rails/sample_app/app/models/user.rb",
+		"/C/rails/sample_app/app/helpers/application_helper.rb",
+		"/C/rails/sample_app/app/helpers/sessions_helper.rb",
+		"/C/rails/sample_app/app/helpers/users_helper.rb",
+		"/C/rails/sample_app/app/helpers/static_pages_helper.rb",
+		"/C/Documents/Amadeus/WSDL/1ASIWPOC1A_PDT_20130802_230808.wsdl",
+		"/C/rails/sample_app/app/views/bootstrap-nav.css.scss",
+		"/C/rails/sample_app/app/controllers/sessions_controller.rb",
+		"/C/rails/sample_app/Gemfile",
+		"/C/Source/Web/Development/prototype/nav.inc",
+		"/C/rails/sample_app/app/assets/stylesheets/bootstrap.css",
+		"/C/rails/sample_app/app/views/static_pages/olark.html.erb",
+		"/C/Source/Web/Development/prototype/footer.inc",
+		"/C/rails/sample_app/app/assets/stylesheets/application.css.scss",
+		"/C/rails/sample_app/lib/assets/application.css.scss",
+		"/C/rails/sample_app/app/assets/javascripts/application.js",
+		"/C/rails/sample_app/app/views/static_pages/about.html.erb",
+		"/C/rails/sample_app/app/views/static_pages/help.html.erb",
+		"/C/rails/sample_app/Gemfile.lock",
+		"/C/rails/sample_app/spec/requests/static_pages_spec.rb",
+		"/C/rails/sample_app/app/views/static_pages/about.html",
+		"/C/rails/sample_app/public/hello.html",
+		"/C/rails/sample_app/public/index.html",
+		"/C/rails/sample_app/README.rdoc",
+		"/C/rails/demo_app/app/models/user.rb",
+		"/C/rails/demo_app/app/models/micropost.rb",
+		"/C/rails/demo_app/config/database.yml",
+		"/C/rails/demo_app/Gemfile",
+		"/C/rails/demo_app/db/migrate/20130720151138_create_users.rb",
+		"/C/rails/demo_app/db/migrate/20130720151258_create_users.rb",
+		"/C/rails/demo_app/config/routes.rb",
+		"/C/rails/demo_app/app/controllers/users_controller.rb",
+		"/C/rails/first_app/Gemfile",
+		"/C/rails/first_app/README.md",
+		"/C/rails/first_app/.gitignore",
+		"/C/Users/user/AppData/Roaming/Sublime Text 2/Packages/User/Ruby on Rails.sublime-settings"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"multi",
+			"date"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/models/search.rb",
+					"settings":
+					{
+						"buffer_size": 614,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								240,
+								240
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 1.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "script/cities.rb",
+					"settings":
+					{
+						"buffer_size": 419,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								419,
+								419
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/searches/show.html.erb",
+					"settings":
+					{
+						"buffer_size": 55,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								48,
+								48
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/models/region.rb",
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								164,
+								164
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/views/city_regions/_city_region.html.erb",
+					"settings":
+					{
+						"buffer_size": 67,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								29,
+								29
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/models/city_region.rb",
+					"settings":
+					{
+						"buffer_size": 212,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								212,
+								212
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/models/city.rb",
+					"settings":
+					{
+						"buffer_size": 236,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								166,
+								166
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/views/layouts/application.html.erb",
+					"settings":
+					{
+						"buffer_size": 687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								214,
+								214
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

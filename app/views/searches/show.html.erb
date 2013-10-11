@@ -1,0 +1,8 @@
+<h1>Search Results</h1>
+
+<%= content_tag :div, "", id: "results_chart", data: {city: cities_chart_data(@search) } %>
+
+<%= paginate @search %>
+<%= render @search %>
+
+ 

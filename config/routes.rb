@@ -5,6 +5,9 @@ SampleApp::Application.routes.draw do
 
   resources :users
   resources :sessions
+  resources :searches
+
+  get 'bootstrap', to: "static_pages#bootstrap"
 
   root to: 'static_pages#home'
 
