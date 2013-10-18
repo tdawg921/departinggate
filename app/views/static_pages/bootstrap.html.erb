@@ -1,3 +1,6 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+
 <form class="form-inline">
     <legend>
         <h3>Find your perfect vacation</h3>
@@ -11,13 +14,24 @@
       </div>
       <div class="col-lg-2">
         <div class="form-group" id="datepicker">
-          <input type="text" class="input-small form-control" name="start" />
+          <div class="input-group">
+            <input type="text" class="input-small form-control" name="dp-input" id="dp-input" data-date-format="mm/dd/yyyy" data-provide="datepicker"
+              data-date-start-date="now"/>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
         </div>
       </div>
 
       <div class="col-lg-2">
         <div class="form-group" id="datepicker-return">
-          <input type="text" class="input-append form-control" name="end" />
+          <div class="input-group">
+            <input type="text" class="input-append form-control" name="dp2-input" id="dp2-input" data-date-format="mm/dd/yyyy" data-provide="datepicker" />
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
         </div>
       </div>
       <div class="col-lg-2">

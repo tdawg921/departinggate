@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130905235739) do
+ActiveRecord::Schema.define(:version => 20131017230503) do
 
   create_table "address", :primary_key => "Address_ID", :force => true do |t|
     t.string  "Street_1", :limit => 100
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(:version => 20130905235739) do
   add_index "booked_trip", ["User_ID"], :name => "Booked_USER_ID_idx"
   add_index "booked_trip", ["session_ID"], :name => "Booked_Session_ID_idx"
 
+  create_table "cities", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "city_regions", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "city_vacation_type_xref", :primary_key => "ID", :force => true do |t|
     t.integer "City_Code",     :null => false
     t.integer "Vacation_Type", :null => false
@@ -64,6 +74,11 @@ ActiveRecord::Schema.define(:version => 20130905235739) do
 
   add_index "city_vacation_type_xref", ["City_Code"], :name => "fk_city_idx"
   add_index "city_vacation_type_xref", ["Vacation_Type"], :name => "fk_type_idx"
+
+  create_table "city_vacations", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "name_demographic", :primary_key => "Name_ID", :force => true do |t|
     t.integer "User_ID"
@@ -115,6 +130,11 @@ ActiveRecord::Schema.define(:version => 20130905235739) do
 
   create_table "ref_vacation_type", :primary_key => "Vacaton_Type_Code", :force => true do |t|
     t.string "Vacation_Type_Description", :limit => 45
+  end
+
+  create_table "regions", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "search_input_data", :primary_key => "Search_Result_ID", :force => true do |t|
@@ -173,6 +193,11 @@ ActiveRecord::Schema.define(:version => 20130905235739) do
     t.string   "destination"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "budget"
+    t.date     "depart_date"
+    t.date     "return_date"
+    t.integer  "origin"
+    t.integer  "traveller"
   end
 
   create_table "session_user_xref", :primary_key => "Session_ID", :force => true do |t|
@@ -209,6 +234,11 @@ ActiveRecord::Schema.define(:version => 20130905235739) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "vacations", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

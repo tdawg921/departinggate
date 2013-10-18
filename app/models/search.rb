@@ -1,5 +1,5 @@
 class Search < ActiveRecord::Base
-  attr_accessible :destination, :region_id, :vacation_id
+  attr_accessible :origin, :depart_date, :date_return, :destination, :region_id, :vacation_id
 
   def cities
   	@cities ||= find_cities
