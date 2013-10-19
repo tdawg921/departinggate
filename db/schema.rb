@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131017230503) do
+ActiveRecord::Schema.define(:version => 20131018211346) do
 
   create_table "address", :primary_key => "Address_ID", :force => true do |t|
     t.string  "Street_1", :limit => 100
@@ -198,6 +198,9 @@ ActiveRecord::Schema.define(:version => 20131017230503) do
     t.date     "return_date"
     t.integer  "origin"
     t.integer  "traveller"
+    t.boolean  "flight"
+    t.boolean  "hotel"
+    t.boolean  "car"
   end
 
   create_table "session_user_xref", :primary_key => "Session_ID", :force => true do |t|

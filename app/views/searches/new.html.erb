@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="col-lg-2">
-        <%= f.select :traveller, (1..10).to_a, :class=>"form-control" %>
+        <%= select_tag :traveller, options_for_select((1..9).each {|i| i.to_s + " travellers"}), {:class=>"form-control"} %>
         <!--<select class="form-control" style="width=100px;">
             <option>1 Traveller</option>
             <option>2 Travellers</option>
@@ -52,10 +52,10 @@
       <span class="help-block">
         <h5>2. Customize your results</h5>
       </span>
-      <div class="col-lg-2" id="slider">
+      <div class="col-lg-2">
           <p>
-            <label for="amount">Budget</label>
-            <input type="text" id="amount" class="input-medium" style="border: 0; color: #0044cc; font-weight: bold;" />
+            <%= f.label :budget %>
+            <%= f.text_field :budget, :type =>"text", :id => "amount", :class=>"input-medium span1", :style=>"border: 0; color: #0044cc; font-weight: bold;" %>
           </p>
           <div>
             <div id="slider-range"></div>
@@ -64,71 +64,26 @@
       <div class="col-lg-2">
         <div class="btn-group-vertical">
           <p>Going to:</p>
-          <div class="radio">
-            <label for="radio1">
-                <input type="radio" value="true" name="goingRadio" id="radio5">
-                Anywhere
-            </label>
-          </div>
-          <div class="radio">
-            <label for="radio1">
-                <input type="radio" value="true" name="goingRadio" id="radio1">
-                <span>South East</span>
-            </label>
-          </div>
-          <div class="radio">
-            <label for="radio2">
-                <input type="radio" value="true" name="goingRadio" id="radio2">
-                Midwest&nbsp&nbsp&nbsp
-            </label>
-          </div>
-          <div class="radio">
-            <label for="radio3">
-                <input type="radio" value="true" name="goingRadio" id="radio3">
-                North East
-            </label>
-          </div>
-          <div class="radio">
-            <label for="radio4">
-                <input type="radio" value="true" name="goingRadio" id="radio4">
-                West Coast
-            </label>
-          </div>
+          <% Region.all.each do |r| %>
+            <%= f.label :region_id, :for => "checkbox" do %>
+              <%= f.radio_button :region_id, r.Region_Code %>
+              <%= r.Region_Description %>
+            <% end %>
+            <br />
+          <% end %>
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="btn-group-vertical">
+       <div class="btn-group-vertical">
           <p>Activities:</p>
-          <div class="checkbox">
-            <label for="radio10">
-                <input type="checkbox" value="true" name="activityChecbox" id="checkbox10">
-                Golf
-            </label>
-          </div>
-          <br />
-          <div class="checkbox">
-            <label for="radio11">
-                <input type="checkbox" value="true" name="activityChecbox" id="checkbox11">
-                Hiking
-            </label>
-          </div>
-          <br />
-          <div class="checkbox">
-            <label for="radio12">
-                <input type="checkbox" value="true" name="activityChecbox" id="checkbox12">
-                Nightlife
-            </label>
-          </div>
-          <br />
-          <div class="checkbox">
-            <label for="radio13">
-                <input type="checkbox" value="true" name="activityChecbox" id="checkbox13">
-                Skiing
-            </label>
-          </div>
+          <% Vacation.limit(5).each do |v| %>
+            <%= f.radio_button :vacation_id, v.Vacaton_Type_Code %>
+            <%= f.label :vacation_id, v.Vacation_Type_Description %>
+            <br />
+          <% end %>
         </div>
       </div>
-      <div class="col-lg-2">
+      <!--<div class="col-lg-2">
         <div class="btn-group-vertical">
           <p>Location:</p>
           <div class="radio">
@@ -159,40 +114,27 @@
             </label>
           </div>
         </div>
-      </div>
+      </div>-->
       <div class="col-lg-1">
         <div class="btn-group-vertical">
           <p>I need:</p>
           <div class="checkbox">
-            <label for="checkbox">
-                <input type="checkbox" value="true" id="checkbox" name="checkbox" checked>
-                Flight
-            </label>
-          </div>
-          <br />
-          <div class="checkbox">
-            <label for="checkbox">
-                <input type="checkbox" value="true" id="checkbox1" name="checkbox">
-                Hotel
-            </label>
-          </div>
-          <br />
-          <div class="checkbox">
-            <label for="checkbox">
-                <input type="checkbox" value="true" id="checkbox2" name="checkbox">
-                Car
-            </label>
-          </div>
-          <br />
-          <div class="checkbox">
-            <label for="checkbox">
-                <input type="checkbox" value="true" id="checkbox3" name="checkbox">
-                Train
-            </label>
-          </div>
+              <%= f.label :flight, :for =>"checkbox" do %>
+                <%= f.check_box :flight, {checked: true} %>
+                Flights
+              <% end %>
+              <%= f.label :hotel, :for =>"checkbox" do %>
+                <%= f.check_box :hotel%>
+                Hotels
+              <% end %>
+              <%= f.label :car, :for =>"checkbox" do %>
+                <%= f.check_box :car %>
+                Cars
+              <% end %>
+            </div>
         </div>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-2">
         <%= f.text_field :destination, :placeholder => "Destination City", :class => "form-control"%>
       </div>
     </div>
