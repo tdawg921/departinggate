@@ -10,11 +10,14 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require datepicker-form
-//= require raphael
-//= require morris
 //= require bootstrap
 //= require jquery-1.9.1
 //= require jquery-ui
+//= require raphael
+//= require morris
 //= require slider
+//= require typeahead.min
+//= require typeahead_airports
 //= require datepicker
+//= require datepicker-form
+//= require searches

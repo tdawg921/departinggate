@@ -1,5 +1,6 @@
 class Search < ActiveRecord::Base
   attr_accessible :origin, :depart_date, :date_return, :destination, :region_id, :vacation_id, :budget, :flight, :hotel, :car
+  #validates_inclusion_of :origin, in: ['DCA'], message: "Please enter a valid origination airport"
 
   def cities
   	@cities ||= find_cities
@@ -68,7 +69,7 @@ class Search < ActiveRecord::Base
     cities.sort! { |a,b| b.rating <=> a.rating }
 
     
-    cities = Kaminari.paginate_array(cities).page(1).per(10)
+    cities = Kaminari.paginate_array(cities).page(1).per(5)
 
     cities
 

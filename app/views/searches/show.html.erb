@@ -1,8 +1,14 @@
-<h1>Search Results</h1>
 
-<%= content_tag :div, "", id: "results_chart", data: {city: cities_chart_data(@search) } %>
 
-<%= paginate @search %>
-<%= render @search %>
+
+<div class="col-md-3">
+	<h3>Search Criteria</h3>
+	<p>Your budget is <%= @search_params.budget %></p>
+</div>
+<div class="col-md-9">
+	<%= content_tag :div, "", id: "results_chart", data: {city: cities_chart_data(@search) } %>
+	<%= render @search %>
+	<%= paginate @search %>
+</div>
 
  

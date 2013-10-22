@@ -2,6 +2,16 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
 
 <%= form_for @search, :html => {class: "form-inline"} do |f| %>
+    <% if @search.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% @search.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
     <legend>
         <h3>Find your perfect vacation</h3>
     </legend>
@@ -10,26 +20,22 @@
           <h5>1. Specify the basics</h5>
       </span>
       <div class="col-lg-3">
-        <%= f.text_field :origin, :placeholder => "Departing Airport or City", :class => "form-control"%>
+        <%= f.text_field :origin, :placeholder => "Departing Airport or City", :class => "typeahead form-control", :value => @closest_airport.first.code + " - " + @closest_airport.first.name%>
       </div>
       <div class="col-lg-2">
         <div class="form-group" id="datepicker">
           <div class="input-group">
             <%= f.text_field :depart_date, :name => "dp-input", :id => "dp-input", :class=>"input-small form-control" %>
-            <!--<input type="text" class="input-small form-control" name="dp-input" id="dp-input" data-date-format="mm/dd/yyyy" data-provide="datepicker"
-              data-date-start-date="now"/>-->
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
           </div>
         </div>
       </div>
-
       <div class="col-lg-2">
         <div class="form-group" id="datepicker-return">
           <div class="input-group">
             <%= f.text_field :return_date, :name => "dp2-input", :id => "dp2-input", :class=>"input-small form-control" %>
-            <!--<input type="text" class="input-append form-control" name="dp2-input" id="dp2-input" data-date-format="mm/dd/yyyy" data-provide="datepicker" />-->
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -38,11 +44,6 @@
       </div>
       <div class="col-lg-2">
         <%= select_tag :traveller, options_for_select((1..9).each {|i| i.to_s + " travellers"}), {:class=>"form-control"} %>
-        <!--<select class="form-control" style="width=100px;">
-            <option>1 Traveller</option>
-            <option>2 Travellers</option>
-            <option>3 Travellers</option>
-        </select>-->
       </div>
       <div class="pull-right">
           <button type="submit" class="btn btn-success" style="width: 150px">Search</button>
@@ -154,5 +155,3 @@ $(function () {
               " - $" + $("#slider-range").slider("values", 1));
         });
 </script>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>

@@ -2,6 +2,8 @@ class SearchesController < ApplicationController
 
 	def new
 		@search = Search.new
+		@client_ip = remote_ip()
+		@closest_airport = Airport.near(@client_ip, 5, :order => "distance")
 	end
 
 	def create
@@ -12,6 +14,7 @@ class SearchesController < ApplicationController
 	def show
 		@search = Search.find(params[:id])
 		@search = @search.cities.page(params[:page])
+		@search_params = Search.find(params[:id])
 	end
 
 	def index

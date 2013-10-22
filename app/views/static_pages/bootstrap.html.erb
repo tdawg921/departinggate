@@ -208,3 +208,37 @@ $(function () {
 </script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+  <legend>
+    <h3>Find your perfect vacation</h3>
+  </legend>
+  <span class="help-block">
+    <h5>1. Specify the basics</h5>
+  </span>
+  <div class="form-group">
+    <%= f.text_field :destination, :placeholder => "Departing Airport or City", :class => "input-large"%>
+    <span class="help-inline">
+      Leaving:
+    </span>
+    <div class="input-append date" id="dp" data-date="now" data-date-format="mm/dd/yyyy" data-date-start-date="now">
+        <input type="text" class="input-small" value="now" id="dp-input" required />
+        <span class="add-on">
+            <i class="icon-calendar"></i>
+        </span>
+    </div>
+    <span class="help-inline">Returning:</span>
+      <div class="input-append date" id="dp2" data-date="soon" data-date-format="mm/dd/yyyy" data-date-start-date="soon">
+          <input type="text" value="soon" class="input-small" id="dp2-input" />
+          <span class="add-on">
+              <i class="icon-calendar"></i>
+          </span>
+      </div>
+    <div class="field">
+    <%= f.label :region_id %>
+    <%= f.collection_select :region_id, Region.order(:Region_Description), :Region_Code, :Region_Description, include_blank: true %>
+
+     <%= f.label :vacation_id %>
+    <%= f.collection_select :vacation_id, Vacation.order(:Vacation_Type_Description), :Vacaton_Type_Code, :Vacation_Type_Description, include_blank: true %>
+  </div>
+  <div class="actions inline"><%= f.submit "Search", class: 'btn btn-primary'%></div>
+</div>
