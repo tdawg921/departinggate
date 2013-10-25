@@ -21,5 +21,5 @@
 //= require datepicker
 //= require datepicker-form
 //= require searches
+//= require jquery_ujs
 
-//= require jquery-ujs
