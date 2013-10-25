@@ -34,4 +34,8 @@ SampleApp::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Suggested by Devise (authentication)
+  ### Will need to do this in other environments as available (test, prod, etc.)
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
