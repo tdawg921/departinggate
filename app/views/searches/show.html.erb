@@ -1,12 +1,75 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
 
+<div class= "row">
+	<div class="col-md-3">
+		<%= form_for @search_params, :html => {class: "form-horizontal"} do |f| %>
+			<h3>Search Criteria</h3>
+			<div class="row">
+		       	<div class="checkbox-inline col-md-3">
+		        	<%= f.label :flight, :for =>"checkbox", :class => "checkbox-inline" do %>
+		            	<%= f.check_box :flight  %>
+		                Flights
+		        	<% end %>
+		        </div>
+		        <div class="checkbox-inline col-md-3">
+		            <%= f.label :hotel, :for =>"checkbox", :class => "checkbox-inline" do %>
+		            	<%= f.check_box :hotel %>
+		                Hotels
+		            <% end %>
+		        </div>
+		        <div class="checkbox-inline col-md-3">
+		            <%= f.label :car, :for =>"checkbox", :class => "checkbox-inline" do %>
+		            	<%= f.check_box :car %>
+		                Cars
+		            <% end %>
+		        </div>
+		    </div>
+		    <div class="form-group">
+	        	<%= f.label :budget, "Your budget is", :class => "control-label col-md-6" %>
+	            <div class="col-md-6">
+		            <%= f.text_field :budget, :type =>"text", :id => "amount", :class=>"input-md form-control", :style=>"border: 0; font-weight: bold;" %>
 
-
-<div class="col-md-3">
-	<h3>Search Criteria</h3>
-	<p>Your budget is <%= @search_params.budget %></p>
+		        </div>
+		        <div class="col-md-11">
+		        	<div id="slider-range"></div>
+		        </div>
+		    </div>
+	    	<div class="form-group">
+		        <%= f.label :origin, :class =>"control-label col-md-3"%>
+		        <div class="col-md-9">
+					<%= f.text_field :origin, :class => "typeahead form-control", :value => @search_params.origin %>
+				</div>
+			</div>
+			<div class="form-group" id="datepicker">
+				<%= f.label :depart_date, "Leaving",  :class => "control-label col-md-3", :text => "Leaving" %>
+				<div class="col-md-9">
+		          <div class="input-group">
+		            <%= f.text_field :depart_date, :name => "dp-input", :id => "dp-input", :class=>"input-small form-control" %>
+		            <span class="input-group-addon">
+		              <span class="glyphicon glyphicon-calendar"></span>
+		            </span>
+		          </div>
+	      		</div>
+        	</div>
+        	<div class="form-group" id="datepicker">
+				<%= f.label :return_date, "Returning",  :class => "control-label col-md-3", :text => "Leaving" %>
+				<div class="col-md-9">
+		          <div class="input-group">
+		            <%= f.text_field :return_date, :name => "dp2-input", :id => "dp2-input", :class=>"input-small form-control" %>
+		            <span class="input-group-addon">
+		              <span class="glyphicon glyphicon-calendar"></span>
+		            </span>
+		          </div>
+	      		</div>
+        	</div>
+		<% end %>
+	</div>
+	<div class="col-md-9">
+		<%= content_tag :div, "", id: "results_chart", data: {city: cities_chart_data(@search) } %>
+	</div>
 </div>
-<div class="col-md-9">
-	<%= content_tag :div, "", id: "results_chart", data: {city: cities_chart_data(@search) } %>
+<div class="row">
 	<%= render @search %>
 	<%= paginate @search %>
 </div>

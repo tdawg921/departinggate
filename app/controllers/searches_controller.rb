@@ -20,4 +20,5 @@ class SearchesController < ApplicationController
 	def index
 		@search = Search.order(:id).page(params[:page])
 	end
+
 end
