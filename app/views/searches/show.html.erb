@@ -66,7 +66,7 @@
 		          </div>
 	      		</div>
         	</div>
-        	<div class="form-group col-md-8">
+        	<!--<div class="form-group col-md-8">
 		       <div class="btn-group-vertical">
 		          <p>Type:</p>
 		          <% Vacation.limit(5).each do |v| %>
@@ -75,17 +75,20 @@
 		            <br />
 		          <% end %>
 		        </div>
-		    </div>
-		    <div class="btn-group-vertical">
-		          <p>Type:</p>
-		          <% Vacation.limit(5).each do |v| %>
-		            <%= f.radio_button :vacation_id, v.Vacaton_Type_Code %>
-		            <%= f.label :vacation_id, v.Vacation_Type_Description %>
-		            <br />
-		          <% end %>
-		        </div>
-		    </div>
-		    <div class="form-group col-md-6">
+		    </div>-->
+		    <div class="form-group">
+		          <%= f.label :vacation_id, "Type", :class=> "control-label col-md-3" %>
+		          <div class="col-md-9">
+		         	 <%= f.collection_select(:vacation_id, Vacation.limit(5), :Vacaton_Type_Code, :Vacation_Type_Description, {}, {:class=>'form-control'}) %>
+		      		</div>
+	        </div>
+	        <div class="form-group">
+		          <%= f.label :region_id, :class=>"control-label col-md-3"%>
+		          <div class="col-md-9">
+		          	<%= f.collection_select(:region_id, Region.all, :Region_Code, :Region_Description, {}, {:class=>'form-control'}) %>
+		          </div>
+	        </div>
+		    <!--<div class="form-group col-md-6">
 		        <div class="btn-group-vertical">
 		          <p>Region:</p>
 		          <% Region.all.each do |r| %>
@@ -94,7 +97,7 @@
 		              <br />
 		            <% end %>
 		        </div>
-	      	</div>
+	      	</div>-->
 			<div class="col-md-10 offset1">
 	      		<%= f.button "Update Criteria", :type=> "submit", :class=>"btn btn-primary btn-block"%>
 			</div>
