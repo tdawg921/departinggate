@@ -1,3 +1,37 @@
 <div class="city">
-  <h2><%= city.city_name + ", " + city.state +  " - " + city.rating.to_s %></h2>
+	<div class="col-md-6">
+		<div class="row">
+			<div class="col-sm-6">
+				<h4><%= city.city_name + ", " + city.state%></h4>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			 <p>$1,299</p>
+			 <%= content_tag "button", "Select", :class=>"btn btn-primary" %>
+			 <a href="#" class="thumbnail">
+				<%= image_tag "placeholder.png" %>
+			</a>
+		</div>
+		 <div class="col-sm-3">
+		 	<p>Flight</p>
+		 	<h6><small>JFK 9:25A --> MIA 11:25A</small></h6>
+		 	<h6><small>1 Stop (CLT)</small></h6>
+		 	<h6><small>4 hrs 0 mins</small></h6>
+		 	<h6><small><a href="#">See Flight Details</a></small></h6>
+		</div>
+		<div class="col-sm-3">
+			<p>Hotel</p>
+			<h6><small>Miami Westin executive</small></h6>
+		 	<h6><small>$116/night</small></h6>
+		 	<h6><small>3 nights</small></h6>
+		 	<h6><small><a href="#">See Hotel Details</a></small></h6>
+		</div>
+		<div class="col-sm-3">
+			<p>Car</p>
+			<h6><small>201 Dixie Highway</small></h6>
+		 	<h6><small>$30/day</small></h6>
+		 	<h6><small>4 days</small></h6>
+		 	<h6><small><a href="#">See Car Details</a></small></h6>
+		</div>
+	</div>
 </div>

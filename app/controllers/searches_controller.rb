@@ -7,6 +7,7 @@ class SearchesController < ApplicationController
 	end
 
 	def create
+		#params[:search][:depart_date] = params[:search][:depart_date].to_s(:db)
 		@search = Search.create!(params[:search])
 		redirect_to @search
 	end

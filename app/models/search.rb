@@ -1,5 +1,5 @@
 class Search < ActiveRecord::Base
-  attr_accessible :origin, :depart_date, :date_return, :destination, :region_id, :vacation_id, :budget, :flight, :hotel, :car
+  attr_accessible :origin, :depart_date, :return_date, :destination, :region_id, :vacation_id, :budget, :flight, :hotel, :car
   before_create :find_enums
   #validates_inclusion_of :origin, in: ['DCA'], message: "Please enter a valid origination airport"
 
@@ -75,7 +75,7 @@ private
     cities.sort! { |a,b| b.rating <=> a.rating }
 
     
-    cities = Kaminari.paginate_array(cities).page(1).per(5)
+    cities = Kaminari.paginate_array(cities).page(1).per(4)
 
     cities
 

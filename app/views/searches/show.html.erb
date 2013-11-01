@@ -1,10 +1,13 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
-
+<%= javascript_include_tag "searches.js" %> 
+<%= javascript_include_tag "datepicker.js" %> 
+<!--<%= javascript_include_tag "datepicker-results.js" %> -->
+ 
 <div class= "row">
 	<div class="col-md-3">
 		<%= form_for @search_params, :html => {class: "form-horizontal"} do |f| %>
-			<h3>Search Criteria</h3>
+			<legend>Search Criteria</legend>
 			<div class="row">
 		       	<div class="checkbox-inline col-md-3">
 		        	<%= f.label :flight, :for =>"checkbox", :class => "checkbox-inline" do %>
@@ -41,19 +44,19 @@
 					<%= f.text_field :origin, :class => "typeahead form-control", :value => @search_params.origin %>
 				</div>
 			</div>
-			<div class="form-group" id="datepicker">
-				<%= f.label :depart_date, "Leaving",  :class => "control-label col-md-3", :text => "Leaving" %>
+			<div class="form-group" id="datepicker_depart">
+				<%= f.label :depart_date, "Leaving",  :class => "control-label col-md-3" %>
 				<div class="col-md-9">
 		          <div class="input-group">
-		            <%= f.text_field :depart_date, :name => "dp-input", :id => "dp-input", :class=>"input-small form-control" %>
+		            <%= f.text_field :depart_date, :name => "dp-input", :id => "dp-input", :class=>"datepicker input-small form-control" %>
 		            <span class="input-group-addon">
 		              <span class="glyphicon glyphicon-calendar"></span>
 		            </span>
 		          </div>
 	      		</div>
         	</div>
-        	<div class="form-group" id="datepicker">
-				<%= f.label :return_date, "Returning",  :class => "control-label col-md-3", :text => "Leaving" %>
+        	<div class="form-group" id="datepicker_return">
+				<%= f.label :return_date, "Returning",  :class => "control-label col-md-3" %>
 				<div class="col-md-9">
 		          <div class="input-group">
 		            <%= f.text_field :return_date, :name => "dp2-input", :id => "dp2-input", :class=>"input-small form-control" %>
@@ -63,6 +66,38 @@
 		          </div>
 	      		</div>
         	</div>
+        	<div class="form-group col-md-8">
+		       <div class="btn-group-vertical">
+		          <p>Type:</p>
+		          <% Vacation.limit(5).each do |v| %>
+		            <%= f.radio_button :vacation_id, v.Vacaton_Type_Code %>
+		            <%= f.label :vacation_id, v.Vacation_Type_Description %>
+		            <br />
+		          <% end %>
+		        </div>
+		    </div>
+		    <div class="btn-group-vertical">
+		          <p>Type:</p>
+		          <% Vacation.limit(5).each do |v| %>
+		            <%= f.radio_button :vacation_id, v.Vacaton_Type_Code %>
+		            <%= f.label :vacation_id, v.Vacation_Type_Description %>
+		            <br />
+		          <% end %>
+		        </div>
+		    </div>
+		    <div class="form-group col-md-6">
+		        <div class="btn-group-vertical">
+		          <p>Region:</p>
+		          <% Region.all.each do |r| %>
+		              <%= f.radio_button :region_id, r.Region_Code %>
+		              <%= f.label :region_id, r.Region_Description %>
+		              <br />
+		            <% end %>
+		        </div>
+	      	</div>
+			<div class="col-md-10 offset1">
+	      		<%= f.button "Update Criteria", :type=> "submit", :class=>"btn btn-primary btn-block"%>
+			</div>
 		<% end %>
 	</div>
 	<div class="col-md-9">
@@ -70,8 +105,12 @@
 	</div>
 </div>
 <div class="row">
-	<%= render @search %>
-	<%= paginate @search %>
-</div>
+	<div class="col-md-offset-3 col-md-9">
+		<%= render @search %>
+		<div class="text-center">
+			<%= paginate @search %>
+		</div>
+	</div>
+	</div>
 
  

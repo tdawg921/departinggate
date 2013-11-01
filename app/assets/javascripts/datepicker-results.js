@@ -4,29 +4,31 @@
         var daysToAdd = 7;
 
         soon.setDate(now.getDate() + daysToAdd);
-        var dd = now.getDate();
-        var mm = now.getMonth() + 1;
-        var y = now.getFullYear();
 
-        var nowFormatted = mm + "/" + dd + "/" + y;
 
-        $(function () {
-            $('.datepicker').datepicker({
-                //format: 'YYYY-mm-dd'
+        $(document).ready(function () {
+            $('#dp-input').datepicker({
+                format: 'YYYY-mm-dd'
             });
-            //$('#dp-input').attr("value", nowFormatted);
-            //$('#dp2').attr("data-date-start-date", soon);
 
-            dd = soon.getDate();
-            mm = soon.getMonth() + 1;
-            y = soon.getFullYear();
+            /*var $departing = $('#dp-input').val();
+            var $returning = $('#dp2-input').val();
 
-            var soonFormatted = mm + "/" + dd + "/" + y;
-            //$('#dp2-input').attr("value", soonFormatted);
-            $('#dp-input').attr("data-date-start-date", nowFormatted);
-            $('#dp2-input').attr("data-date-start-date", nowFormatted);
+            var dd = $departing.split('-')[2];
+            var mm = $departing.split('-')[1];
+            var y = $departing.split('-')[0];
+
+            var $departFormatted = mm + "/" + dd + "/" + y;
+            $('#dp-input').val($departFormatted);
 
 
+            dd = $returning.split('-')[2];
+            mm = $returning.split('-')[1];
+            y = $returning.split('-')[0];
+
+            var $returnFormatted = mm + "/" + dd + "/" + y;
+
+            $('#dp2-input').val($returnFormatted);*/
 
             var checkin = $('#dp-input').datepicker({
                 onRender: function (date) {

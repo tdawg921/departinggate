@@ -1,5 +1,7 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+<%= javascript_include_tag "datepicker.js" %> 
+<%= javascript_include_tag "datepicker-form.js" %> 
 
 <%= form_for @search, :html => {class: "form-inline"} do |f| %>
     <% if @search.errors.any? %>
@@ -25,7 +27,7 @@
       <div class="col-lg-2">
         <div class="form-group" id="datepicker">
           <div class="input-group">
-            <%= f.text_field :depart_date, :name => "dp-input", :id => "dp-input", :class=>"input-small form-control" %>
+            <%= f.text_field :depart_date, :id => "dp-input", :value=> Date.today, :class=>"datepicker input-small form-control" %>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -35,7 +37,7 @@
       <div class="col-lg-2">
         <div class="form-group" id="datepicker-return">
           <div class="input-group">
-            <%= f.text_field :return_date, :name => "dp2-input", :id => "dp2-input", :class=>"input-small form-control" %>
+            <%= f.text_field :return_date, :id => "dp2-input", :value=> Date.today, :class=>"datepicker input-small form-control" %>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>

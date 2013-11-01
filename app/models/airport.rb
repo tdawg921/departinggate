@@ -9,6 +9,7 @@ class Airport < ActiveRecord::Base
 
   def tokens
   	tokens = self.name.split(' ')
+    tokens << self.code
   end
 
   def self.code

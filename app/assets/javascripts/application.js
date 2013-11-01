@@ -18,8 +18,6 @@
 //= require slider
 //= require typeahead.min
 //= require typeahead_airports
-//= require datepicker
-//= require datepicker-form
-//= require searches
 //= require jquery_ujs
+
 
