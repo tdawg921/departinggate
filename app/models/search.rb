@@ -8,12 +8,12 @@ class Search < ActiveRecord::Base
   end
 
 
-    def find_enums
-      code = self.origin.split(' ').first
-      self.origin = code
-    end
+  def find_enums
+    code = self.origin.split(' ').first
+    self.origin = code
+  end
 
-private
+  private
   def find_cities
     #declare arrays and initialize Cities
     cities = City.order(:city_name)

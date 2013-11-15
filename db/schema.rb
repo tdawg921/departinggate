@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025215521) do
+ActiveRecord::Schema.define(:version => 20131113175842) do
 
   create_table "address", :primary_key => "Address_ID", :force => true do |t|
     t.string  "Street_1", :limit => 100
@@ -213,6 +213,14 @@ ActiveRecord::Schema.define(:version => 20131025215521) do
   end
 
   add_index "session_user_xref", ["User_ID"], :name => "Session_ID_Xref_User_ID_idx"
+
+  create_table "soap_sessions", :force => true do |t|
+    t.string   "session_id"
+    t.string   "security_token"
+    t.string   "timestamps"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "user_data", :primary_key => "User_ID", :force => true do |t|
     t.integer "Party_Group_ID"
