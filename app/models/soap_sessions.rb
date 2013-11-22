@@ -78,7 +78,7 @@ class SoapSessions < ActiveRecord::Base
 		#@xml = 
 	end
 
-	def self.sweep(time = 5.minutes)
+	def self.sweep(time = 14.minutes)
 		#if time.is_a?(String)
 	  	#	time = time.split.inject { |count, unit| count.to_i.send(unit) }
 		#end

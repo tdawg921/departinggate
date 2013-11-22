@@ -1,5 +1,6 @@
 class Search < ActiveRecord::Base
   attr_accessible :origin, :depart_date, :return_date, :destination, :region_id, :vacation_id, :budget, :flight, :hotel, :car
+  has_one :master_pricer_search
   before_create :find_enums
   #validates_inclusion_of :origin, in: ['DCA'], message: "Please enter a valid origination airport"
 

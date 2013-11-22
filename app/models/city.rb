@@ -14,4 +14,8 @@ class City < ActiveRecord::Base
 	def self.id
 		@id
 	end
+
+	def airports
+		we
+	end
 end

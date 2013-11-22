@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131113175842) do
+ActiveRecord::Schema.define(:version => 20131121225932) do
 
   create_table "address", :primary_key => "Address_ID", :force => true do |t|
     t.string  "Street_1", :limit => 100
@@ -85,6 +85,13 @@ ActiveRecord::Schema.define(:version => 20131113175842) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "master_pricer_searches", :force => true do |t|
+    t.integer  "search_id"
+    t.string   "xml"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "name_demographic", :primary_key => "Name_ID", :force => true do |t|
     t.integer "User_ID"
     t.integer "Party_Group_id"
@@ -118,6 +125,13 @@ ActiveRecord::Schema.define(:version => 20131113175842) do
     t.string "city_name"
     t.string "state"
     t.string "city_state"
+  end
+
+  create_table "ref_city_airport", :force => true do |t|
+    t.integer  "city_id"
+    t.string   "airport_code"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "ref_city_region", :force => true do |t|
