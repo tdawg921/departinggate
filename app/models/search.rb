@@ -70,7 +70,7 @@ class Search < ActiveRecord::Base
 
     cities.each do |c|
       c.set_rating(vac_ids[c.id])
-      c.get_best_airport
+      #c.get_best_airport
     end
     
     #order by ratings DESC
