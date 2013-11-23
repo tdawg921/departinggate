@@ -35,7 +35,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: dg_production
+  database: dg_development
   pool: 5
   username: root
   password:
