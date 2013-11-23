@@ -67,7 +67,7 @@ module SampleApp
     config.assets.version = '1.0'
 
     #Precompile for heroku
-    config.assets.precompile += %w(datepicker-form.js datepicker.js)
+    config.assets.precompile += %w(datepicker.js datepicker-form.js)
 
   end
 end
