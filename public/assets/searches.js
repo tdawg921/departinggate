@@ -1,0 +1,1 @@
+((function(){jQuery(function(){return Morris.Bar({element:"results_chart",data:$("#results_chart").data("city"),xkey:"city_name",ykeys:["rating"],labels:["Rating"]})})})).call(this);
