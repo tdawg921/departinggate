@@ -3,7 +3,7 @@ class SearchesController < ApplicationController
 	def new
 		@search = Search.new
 		@client_ip = remote_ip()
-		@closest_airport = Airport.near(@client_ip, 5, :order => "distance")
+		@closest_airport = Airport.near(@client_ip, 60, :order => "distance")
 	end
 
 	def create

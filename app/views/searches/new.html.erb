@@ -22,7 +22,11 @@
           <h5>1. Specify the basics</h5>
       </span>
       <div class="col-lg-3">
-        <%= f.text_field :origin, :placeholder => "Departing Airport or City", :class => "typeahead form-control", :value => @closest_airport.first.code + " - " + @closest_airport.first.name%>
+        <% if @closest_airport.first.nil? %>
+          <%= f.text_field :origin, :placeholder => "Departing Airport or City", :class => "typeahead form-control" %>
+        <% else %>
+          <%= f.text_field :origin, :placeholder => "Departing Airport or City", :class => "typeahead form-control", :value => @closest_airport.first.code + " - " + @closest_airport.first.name %>
+        <% end %>
       </div>
       <div class="col-lg-2">
         <div class="form-group" id="datepicker">
