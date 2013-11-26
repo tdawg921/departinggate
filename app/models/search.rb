@@ -1,8 +1,26 @@
 class Search < ActiveRecord::Base
-  attr_accessible :origin, :depart_date, :return_date, :destination, :region_id, :vacation_id, :budget, :flight, :hotel, :car
+  attr_accessible :origin, :depart_date_text, :return_date_text, :destination, 
+    :region_id, :vacation_id, :budget, :flight, :hotel, :car
   has_one :master_pricer_search
   before_create :find_enums
-  #validates_inclusion_of :origin, in: ['DCA'], message: "Please enter a valid origination airport"
+
+  def depart_date_text
+    #depart_date.try(:strftime, "%Y-%m-%d")
+    depart_date.to_s(:db)
+  end
+
+  def return_date_text
+    #return_date.try(:strftime, "%Y-%m-%d")
+    return_date.to_s(:db)
+  end
+
+  def depart_date_text=(date)
+    self.depart_date = Time.parse(date) if date.present?
+  end
+
+  def return_date_text=(date)
+    self.return_date = Time.parse(date) if date.present?
+  end
 
   def cities
   	@cities ||= find_cities

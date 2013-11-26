@@ -31,7 +31,7 @@
       <div class="col-lg-2">
         <div class="form-group" id="datepicker">
           <div class="input-group">
-            <%= f.text_field :depart_date, :id => "dp-input", :value=> Date.today, :class=>"datepicker input-small form-control" %>
+            <%= f.text_field :depart_date_text, :id => "dp-input", :value=> Date.today, :class=>"datepicker input-small form-control" %>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -41,7 +41,7 @@
       <div class="col-lg-2">
         <div class="form-group" id="datepicker-return">
           <div class="input-group">
-            <%= f.text_field :return_date, :id => "dp2-input", :value=> Date.today, :class=>"datepicker input-small form-control" %>
+            <%= f.text_field :return_date_text, :id => "dp2-input", :value=> Date.today, :class=>"datepicker input-small form-control" %>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
