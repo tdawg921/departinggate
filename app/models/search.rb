@@ -4,6 +4,9 @@ class Search < ActiveRecord::Base
   has_one :master_pricer_search
   before_create :find_enums
 
+  validates_date :depart_date, on_or_after: 1.day.ago, on_or_after_message: "The departure date must be after #{Date.today}"
+  validates_date :return_date, on_or_after: :depart_date, on_or_after_message: "Your return date must be after departure date"
+
   def depart_date_text
     #depart_date.try(:strftime, "%Y-%m-%d")
     depart_date.to_s(:db)

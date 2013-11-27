@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.3'
 gem 'mysql2', '0.3.11'
 gem 'savon'
+gem 'validates_timeliness', '~> 3.0'
+gem 'devise'
 gem 'american_date'
 
 group :development, :test do
@@ -17,7 +19,6 @@ end
 
 gem 'jquery-rails'	
 gem 'bcrypt-ruby', '~> 3.0.0'
-#gem "will_paginate", "~> 3.0.5"
 gem 'kaminari'
 gem 'geocoder'
 
@@ -28,5 +29,3 @@ end
 group :production do
 	
 end
-
-gem "devise"

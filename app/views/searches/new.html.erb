@@ -4,25 +4,23 @@
 <%= javascript_include_tag "datepicker-form.js" %> 
 
 <%= form_for @search, :html => {class: "form-inline"} do |f| %>
-    <% if @search.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @search.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
     <legend>
         <h3>Find your perfect vacation</h3>
     </legend>
+    <% if @search.errors.any? %>
+      <% @search.errors.full_messages.each do |message| %>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <%= message %>
+          </div>
+      <% end %>
+    <% end %>
     <div class="row">
       <span class="help-block">
           <h5>1. Specify the basics</h5>
       </span>
       <div class="col-lg-3">
-        <% if @closest_airport.first.nil? %>
+        <% if @closest_airport.nil? %>
           <%= f.text_field :origin, :placeholder => "Departing Airport or City", :class => "typeahead form-control" %>
         <% else %>
           <%= f.text_field :origin, :placeholder => "Departing Airport or City", :class => "typeahead form-control", :value => @closest_airport.first.code + " - " + @closest_airport.first.name %>

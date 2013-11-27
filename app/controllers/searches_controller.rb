@@ -7,8 +7,14 @@ class SearchesController < ApplicationController
 	end
 
 	def create
-		@search = Search.create!(params[:search])
-		redirect_to @search
+		@search = Search.new(params[:search])
+
+		if @search.save
+			redirect_to @search
+		else
+			flash.now[:error]
+			render action: "new"
+		end	
 	end
 
 	def show
