@@ -31,7 +31,7 @@
 		    <div class="form-group">
 	        	<%= f.label :budget, "Your budget is", :class => "control-label col-md-6" %>
 	            <div class="col-md-6">
-		            <%= f.text_field :budget, :type =>"text", :id => "amount", :class=>"input-md form-control", :style=>"border: 0; font-weight: bold;" %>
+		            <%= f.text_field :budget, :value=> @search_params.budget, :type =>"text", :id => "amount", :class=>"input-md form-control", :style=>"border: 0; font-weight: bold;" %>
 
 		        </div>
 		        <div class="col-md-11">

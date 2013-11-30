@@ -39,7 +39,8 @@
       <div class="col-lg-2">
         <div class="form-group" id="datepicker-return">
           <div class="input-group">
-            <%= f.text_field :return_date_text, :id => "dp2-input", :value=> Date.today, :class=>"datepicker input-small form-control" %>
+            <%= f.text_field :return_date_text, :id => "dp2-input", :value=> Date.today + 7.days, 
+            :class=>"datepicker input-small form-control" %>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -47,7 +48,8 @@
         </div>
       </div>
       <div class="col-lg-2">
-        <%= select_tag :traveller, options_for_select((1..9).each {|i| i.to_s + " travellers"}), {:class=>"form-control"} %>
+        <%= f.select :traveller, options_for_select((1..9).map {|i| ["#{i} traveller".pluralize(i), i.to_i]}), options={},
+        html_options = {class: "form-control"} %>
       </div>
       <div class="pull-right">
           <button type="submit" class="btn btn-success" style="width: 150px">Search</button>
@@ -60,7 +62,8 @@
       <div class="col-lg-2">
           <p>
             <%= f.label :budget %>
-            <%= f.text_field :budget, :type =>"text", :id => "amount", :class=>"input-medium span1", :style=>"border: 0; color: #0044cc; font-weight: bold;" %>
+            <%= f.text_field :budget, :type =>"text", :id => "amount", :class=>"input-medium span1", 
+            :style=>"border: 0; color: #0044cc; font-weight: bold;" %>
           </p>
           <div>
             <div id="slider-range"></div>
@@ -88,38 +91,6 @@
           <% end %>
         </div>
       </div>
-      <!--<div class="col-lg-2">
-        <div class="btn-group-vertical">
-          <p>Location:</p>
-          <div class="radio">
-            <label for="radio10">
-                <input type="radio" value="true" name="locationRadio" id="radio6">
-                Beach
-            </label>
-          </div>
-          <br /> 
-          <div class="radio">
-            <label for="radio11">
-                <input type="radio" value="true" name="locationRadio" id="radio7">
-                Mountain
-            </label>
-          </div>
-          <br />
-          <div class="radio">
-            <label for="radio12">
-                <input type="radio" value="true" name="locationRadio" id="radio8">
-                City
-            </label>
-          </div>
-          <br />
-          <div class="radio">
-            <label for="radio12">
-                <input type="radio" value="true" name="locationRadio" id="radio9">
-                Somewhere warm
-            </label>
-          </div>
-        </div>
-      </div>-->
       <div class="col-lg-1">
         <div class="btn-group-vertical">
           <p>I need:</p>

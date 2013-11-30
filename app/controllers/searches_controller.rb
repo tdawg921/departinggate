@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+	#before_filter :traveller_to_int, :only => [:create]
 
 	def new
 		@search = Search.new
@@ -8,6 +9,7 @@ class SearchesController < ApplicationController
 
 	def create
 		@search = Search.new(params[:search])
+		@search.traveller = params[:search][:traveller].to_i
 
 		if @search.save
 			redirect_to @search
@@ -27,4 +29,8 @@ class SearchesController < ApplicationController
 		@search = Search.order(:id).page(params[:page])
 	end
 
+
+	def traveller_to_int
+	  params[:search][:traveller] = params[:search][:traveller].to_i
+	end  
 end
