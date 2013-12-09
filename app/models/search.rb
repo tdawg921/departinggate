@@ -5,7 +5,7 @@ class Search < ActiveRecord::Base
   before_create :find_enums
   #before_save :traveller_to_int
 
-  validates_date :depart_date, on_or_after: 1.day.ago, on_or_after_message: "must be on or after #{Date.today}"
+  validates_date :depart_date, on_or_after: Date.today, on_or_after_message: "must be on or after #{Date.today}"
   validates_date :return_date, on_or_after: :depart_date, on_or_after_message: "must be after the departure date"
 
   def depart_date_text

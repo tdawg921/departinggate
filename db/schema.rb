@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131121225932) do
+ActiveRecord::Schema.define(:version => 20131209181904) do
 
   create_table "address", :primary_key => "Address_ID", :force => true do |t|
     t.string  "Street_1", :limit => 100
@@ -85,6 +85,33 @@ ActiveRecord::Schema.define(:version => 20131121225932) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "flight_details", :force => true do |t|
+    t.integer  "group_of_flights_id"
+    t.date     "date_of_departure"
+    t.string   "time_of_departure"
+    t.date     "date_of_arrival"
+    t.string   "time_of_arrival"
+    t.string   "dep_location_id"
+    t.string   "dep_terminal"
+    t.string   "arr_location_id"
+    t.string   "arr_terminal"
+    t.string   "marketing_carrier"
+    t.string   "operating_carrier"
+    t.string   "flight_number"
+    t.string   "equipment_type"
+    t.string   "electronic_ticketing"
+    t.string   "product_detail_qualifier"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  create_table "group_of_flights", :force => true do |t|
+    t.integer  "search_id"
+    t.integer  "flight_proposal"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "master_pricer_searches", :force => true do |t|
     t.integer  "search_id"
     t.string   "xml"
@@ -109,6 +136,14 @@ ActiveRecord::Schema.define(:version => 20131121225932) do
     t.integer "Name_ID"
   end
 
+  create_table "prop_flight_gr_details", :force => true do |t|
+    t.integer  "group_of_flights_id"
+    t.string   "ref"
+    t.string   "unit_qualifier"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
   create_table "ref_airport", :force => true do |t|
     t.string  "name",      :null => false
     t.string  "code"
@@ -130,8 +165,9 @@ ActiveRecord::Schema.define(:version => 20131121225932) do
   create_table "ref_city_airport", :force => true do |t|
     t.integer  "city_id"
     t.string   "airport_code"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "primary",      :limit => 45
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "ref_city_region", :force => true do |t|

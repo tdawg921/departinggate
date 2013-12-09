@@ -3,102 +3,22 @@ class MasterPricerSearch < ActiveRecord::Base
   belongs_to :search
 
   def self.new_request(search)
-  	#@search = Search.find(search)
-  	@search = Search.find(208)
+  	@search = Search.find(search)
+  	#@search = Search.find(208)
   	@cities = @search.cities
   	puts @cities
   	@client = Savon.client(wsdl: "amadeus.wsdl")
-  	@session = SoapSessions.get_new_session
-  	puts call = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" 
-  	xmlns:wbs=\"http://xml.amadeus.com/ws/2009/01/WBS_Session-2.0.xsd\" xmlns=\"http://xml.amadeus.com/FMPTBQ_12_4_1A\">
-   <soapenv:Header>
-      <wbs:Session>
-         <wbs:SessionId>#{@session.session_id}</wbs:SessionId>
-         <wbs:SequenceNumber>2</wbs:SequenceNumber>
-         <wbs:SecurityToken>#{@session.security_token}</wbs:SecurityToken>
-      </wbs:Session>
-   </soapenv:Header>
-   <soapenv:Body>
-  	<Fare_MasterPricerTravelBoardSearch>
-  <numberOfUnit>
-    <unitNumberDetail>
-      <numberOfUnits>1</numberOfUnits>
-      <typeOfUnit>PX</typeOfUnit>
-    </unitNumberDetail>
-    <unitNumberDetail>
-      <numberOfUnits>10</numberOfUnits>
-      <typeOfUnit>RC</typeOfUnit>
-    </unitNumberDetail>
-  </numberOfUnit>
-  <paxReference>
-    <ptc>ADT</ptc>
-    <traveller>
-      <ref>1</ref>
-    </traveller>
-  </paxReference>
-  <fareOptions>
-    <pricingTickInfo>
-      <pricingTicketing>
-        <priceType>ET</priceType>
-        <priceType>RP</priceType>
-        <priceType>RU</priceType>
-        <priceType>TAC</priceType>
-      </pricingTicketing>
-    </pricingTickInfo>
-  </fareOptions>
-  <itinerary>
-    <requestedSegmentRef>
-      <segRef>1</segRef>
-    </requestedSegmentRef>
-    <departureLocalization>
-      <departurePoint>
-        <locationId>BOS</locationId>
-      </departurePoint>
-    </departureLocalization>
-    <arrivalLocalization>
-      <arrivalPointDetails>
-        <locationId>LON</locationId>
-      </arrivalPointDetails>
-    </arrivalLocalization>
-    <timeDetails>
-      <firstDateTimeDetail>
-        <date>150914</date>
-      </firstDateTimeDetail>
-    </timeDetails>
-  </itinerary>
-  <itinerary>
-    <requestedSegmentRef>
-      <segRef>2</segRef>
-    </requestedSegmentRef>
-    <departureLocalization>
-      <departurePoint>
-        <locationId>LON</locationId>
-      </departurePoint>
-    </departureLocalization>
-    <arrivalLocalization>
-      <arrivalPointDetails>
-        <locationId>BOS</locationId>
-      </arrivalPointDetails>
-    </arrivalLocalization>
-    <timeDetails>
-      <firstDateTimeDetail>
-        <date>200914</date>
-      </firstDateTimeDetail>
-    </timeDetails>
-  </itinerary>
-</Fare_MasterPricerTravelBoardSearch>
-   </soapenv:Body>
-</soapenv:Envelope>"
-=begin
+  	#@session = SoapSessions.get_new_session
+
   	@xml = ::Builder::XmlMarkup.new(:indent => 3)
 
   	call = @xml.tag!("soapenv:Envelope", :"xmlns:soapenv" => "http://schemas.xmlsoap.org/soap/envelope/",
   		:"xmlns:wbs" => "http://xml.amadeus.com/ws/2009/01/WBS_Session-2.0.xsd"){
   		@xml.soapenv :Header do |xml|
   			xml.wbs :Session do |xml|
-	  			xml.wbs :SessionId, @session.session_id
+	  			#xml.wbs :SessionId, @session.session_id
 	  			xml.wbs :SequenceNumber, "2"
-	  			xml.wbs :SecurityToken, @session.security_token
+	  			#xml.wbs :SecurityToken, @session.security_token
   			end
   		end
   		@xml.tag!("soapenv:Body"){
@@ -109,14 +29,14 @@ class MasterPricerSearch < ActiveRecord::Base
 	  					@xml.typeOfUnit("RC")
 	  				}
 	  				@xml.tag!("unitNumberDetail"){
-	  					@xml.numberOfUnits("1")#(@search.traveller.to_s)
+	  					@xml.numberOfUnits(@search.traveller.to_s)
 	  					@xml.typeOfUnit("PX")
 	  				}
 	  			}
 	  			@xml.tag!("paxReference"){
 	  				@xml.ptc "ADT"
 	  				@xml.traveller{
-	  					@xml.ref "1"#@search.traveller.to_s
+	  					@xml.ref  @search.traveller.to_s
 	  				}
 	  			}
 	  			@xml.itinerary{
@@ -137,7 +57,7 @@ class MasterPricerSearch < ActiveRecord::Base
 	  				}
 	  				@xml.tag!("timeDetails"){
 	  					@xml.tag!("firstDateTimeDetail"){
-	  						@xml.date "301113"
+	  						@xml.date @search.depart_date.to_s(:amadeus)
 	  					}
 	  				}
 	  			}
@@ -160,18 +80,25 @@ class MasterPricerSearch < ActiveRecord::Base
 
 	  				@xml.tag!("timeDetails"){
 	  					@xml.tag!("firstDateTimeDetail"){
-	  						@xml.date "301213"
+	  						@xml.date @search.return_date.to_s(:amadeus)
 	  					}
 	  				}
 	  			}
 	  		}
 	  	}
   	}
-=end
 
-  	response = @client.call(:fare_master_pricer_travel_board_search, xml: call)
-  	#puts @search
-  	#puts @xml.to_s
+    puts call
+=begin
+  	#response = @client.call(:fare_master_pricer_travel_board_search, xml: call)
+  	rescue  Savon::SOAPFault => error
+          Rails.logger.warn error.http.code
+    rescue Savon::HTTPError => error
+      Rails.logger.warn error.http.code
+    else
+      body = response.body[fare_master_pricer_travel_board_search_reply]
+      MasterPricerSearch.create({:xml => response})
+=end  
   end
 
 end
