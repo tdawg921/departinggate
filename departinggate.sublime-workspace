@@ -4,6 +4,142 @@
 		"selected_items":
 		[
 			[
+				"se",
+				"search"
+			],
+			[
+				"tra",
+				"traveller"
+			],
+			[
+				"searc",
+				"search_params"
+			],
+			[
+				"on_",
+				"on_or_after_message"
+			],
+			[
+				"depart",
+				"departurePoint"
+			],
+			[
+				"session",
+				"session_id"
+			],
+			[
+				"sess",
+				"session_id"
+			],
+			[
+				"col-",
+				"col-md-3"
+			],
+			[
+				"form-",
+				"form-control"
+			],
+			[
+				"vaca",
+				"Vacation_Type_Description"
+			],
+			[
+				"vacation",
+				"vacation_id"
+			],
+			[
+				"vacation_",
+				"Vacation_Type_Description"
+			],
+			[
+				"dp",
+				"dp2-input"
+			],
+			[
+				"date",
+				"datepicker"
+			],
+			[
+				"checkbox",
+				"checkbox-inline"
+			],
+			[
+				"type",
+				"typeahead"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"text",
+				"text_field"
+			],
+			[
+				"h5",
+				"h5	Tag"
+			],
+			[
+				"des",
+				"destination"
+			],
+			[
+				"reg",
+				"region_id"
+			],
+			[
+				"if",
+				"ife	if … else … end"
+			],
+			[
+				"city",
+				"cityregions"
+			],
+			[
+				"all",
+				"all_ids"
+			],
+			[
+				"dest",
+				"dest_ids"
+			],
+			[
+				"find",
+				"find_all_by_id"
+			],
+			[
+				"cit",
+				"cityvacations"
+			],
+			[
+				"ref",
+				"ref_city_id"
+			],
+			[
+				"do",
+				"dob	Insert do |variable| … end"
+			],
+			[
+				"find_",
+				"find_by_id"
+			],
+			[
+				"cityvaca",
+				"cityvacations"
+			],
+			[
+				"cityv",
+				"cityvacations"
+			],
+			[
+				"cityreg",
+				"cityregions"
+			],
+			[
+				"ct",
+				"city_name"
+			],
+			[
 				"nam",
 				"city_name"
 			],
@@ -30,10 +166,6 @@
 			[
 				"City",
 				"CityRegion"
-			],
-			[
-				"find",
-				"find_city_vacations"
 			],
 			[
 				"find_city",
@@ -68,66 +200,61 @@
 	"buffers":
 	[
 		{
-			"file": "app/models/search.rb",
+			"file": "app/controllers/searches_controller.rb",
 			"settings":
 			{
-				"buffer_size": 614,
+				"buffer_size": 766,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "script/cities.rb",
+			"file": "app/models/search.rb",
 			"settings":
 			{
-				"buffer_size": 419,
+				"buffer_size": 2761,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/helpers/application_helper.rb",
+			"settings":
+			{
+				"buffer_size": 200,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "class MasterPricerSearch < ActiveRecord::Base\n  attr_accessible :id, :search_id, :xml\n  belongs_to :search\n\n  def self.new_request(search)\n  	@search = Search.find(search)\n  	@cities = @search.cities\n  	puts @cities\n  	@client = Savon.client(wsdl: \"amadeus.wsdl\")\n  	@session = SoapSessions.get_new_session\n\n  	@xml = ::Builder::XmlMarkup.new(:indent => 3)\n\n  	call = @xml.tag!(\"soapenv:Envelope\", :\"xmlns:soapenv\" => \"http://schemas.xmlsoap.org/soap/envelope/\",\n  		:\"xmlns:wbs\" => \"http://xml.amadeus.com/ws/2009/01/WBS_Session-2.0.xsd\"){\n  		@xml.soapenv :Header do |xml|\n  			xml.wbs :Session do |xml|\n	  			xml.wbs :SessionId, @session.session_id\n	  			xml.wbs :SequenceNumber, \"2\"\n	  			xml.wbs :SecurityToken, @session.security_token\n  			end\n  		end\n  		@xml.tag!(\"soapenv:Body\"){\n	  		@xml.tag!(\"Fare_MasterPricerTravelBoardSearch\"){\n	  			@xml.tag!(\"numberOfUnit\"){\n	  				@xml.tag!(\"unitNumberDetail\"){\n	  					@xml.numberOfUnits(\"200\")\n	  					@xml.typeOfUnit(\"RC\")\n	  				}\n	  				@xml.tag!(\"unitNumberDetail\"){\n	  					@xml.numberOfUnits(@search.traveller.to_s)\n	  					@xml.typeOfUnit(\"PX\")\n	  				}\n	  			}\n	  			@xml.tag!(\"paxReference\"){\n	  				@xml.ptc \"ADT\"\n	  				@xml.traveller{\n	  					@xml.ref  @search.traveller.to_s\n	  				}\n	  			}\n	  			@xml.itinerary{\n	  				@xml.tag!(\"requestedSegmentRef\"){\n	  					@xml.segRef(\"1\")\n	  				}\n	  				@xml.tag!(\"departureLocalization\"){\n	  					@xml.tag!(\"departurePoint\"){\n	  						@xml.locationId(@search.origin)\n	  					}\n	  				}\n	  				@xml.tag!(\"arrivalLocalization\"){\n	  					#@cities.each do |city|\n	  						@xml.tag!(\"arrivalPointDetails\"){\n	  							@xml.locationId(\"NYC\")\n	  						}\n	  					#end\n	  				}\n	  				@xml.tag!(\"timeDetails\"){\n	  					@xml.tag!(\"firstDateTimeDetail\"){\n	  						@xml.date @search.depart_date.to_s(:amadeus)\n	  					}\n	  				}\n	  			}\n	  			@xml.itinerary{\n	  				@xml.tag!(\"requestedSegmentRef\"){\n	  					@xml.segRef(\"2\")\n	  				}  				\n	  				@xml.tag!(\"departureLocalization\"){\n	  					#@cities.each do |city|\n	  						@xml.tag!(\"departurePoint\"){\n	  							@xml.locationId(\"NYC\")\n	  						}\n	  					#end\n	  				}\n	  				@xml.tag!(\"arrivalLocalization\"){\n	  					@xml.tag!(\"arrivalPointDetails\"){\n	  						@xml.locationId(@search.origin)\n	  					}\n	  				}\n\n	  				@xml.tag!(\"timeDetails\"){\n	  					@xml.tag!(\"firstDateTimeDetail\"){\n	  						@xml.date @search.return_date.to_s(:amadeus)\n	  					}\n	  				}\n	  			}\n	  		}\n	  	}\n  	}\n\n  	response = @client.call(:fare_master_pricer_travel_board_search, xml: call)\n  	rescue  Savon::SOAPFault => error\n      Rails.logger.warn error.http.code\n    rescue Savon::HTTPError => error\n      Rails.logger.warn error.http.code\n    else\n      master_pricer = response.body[:fare_master_pricer_travel_board_search_reply]\n      MasterPricerSearch.create({:xml => master_pricer})\n\n\n  end\n\n  \nend\n",
+			"file": "app/models/master_pricer_search.rb",
+			"file_size": 2828,
+			"file_write_time": 130310987161584002,
+			"settings":
+			{
+				"buffer_size": 2833,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n   <soap:Header xmlns=\"http://xml.amadeus.com/ws/2009/01/WBS_Session-2.0.xsd\">\n      <Session>\n         <SessionId>01H59U4Y3T</SessionId>\n         <SequenceNumber>4</SequenceNumber>\n         <SecurityToken>NZV34A7ZBNHO30TIVEX99PVYI</SecurityToken>\n      </Session>\n   </soap:Header>\n   <soap:Body>\n      <Fare_MasterPricerTravelBoardSearchReply xmlns=\"http://xml.amadeus.com/FMPTBR_12_4_1A\">\n         <replyStatus>\n            <status>\n               <advisoryTypeInfo>FQX</advisoryTypeInfo>\n            </status>\n         </replyStatus>\n         <conversionRate>\n            <conversionRateDetail>\n               <currency>USD</currency>\n            </conversionRateDetail>\n         </conversionRate>\n         <companyIdText>\n            <textRefNumber>25</textRefNumber>\n            <companyText>AMERICAN EAGLE AIRLINES</companyText>\n         </companyIdText>\n         <companyIdText>\n            <textRefNumber>121</textRefNumber>\n            <companyText>ENDEAVOR AIR DBA DELTA CONNECTION</companyText>\n         </companyIdText>\n         <companyIdText>\n            <textRefNumber>224</textRefNumber>\n            <companyText>SHUTTLE AMERICA-DL CONNECTION-DL SHUTTLE</companyText>\n         </companyIdText>\n         <companyIdText>\n            <textRefNumber>15</textRefNumber>\n            <companyText>EXPRESSJET AIRLINES DBA UNITED EXPRESS</companyText>\n         </companyIdText>\n         <flightIndex>\n            <requestedSegmentRef>\n               <segRef>1</segRef>\n            </requestedSegmentRef>\n            <groupOfFlights>\n               <propFlightGrDetail>\n                  <flightProposal>\n                     <ref>1</ref>\n                  </flightProposal>\n                  <flightProposal>\n                     <ref>0115</ref>\n                     <unitQualifier>EFT</unitQualifier>\n                  </flightProposal>\n                  <flightProposal>\n                     <ref>AA</ref>\n                     <unitQualifier>MCX</unitQualifier>\n                  </flightProposal>\n               </propFlightGrDetail>\n               <flightDetails>\n                  <flightInformation>\n                     <productDateTime>\n                        <dateOfDeparture>091213</dateOfDeparture>\n                        <timeOfDeparture>0630</timeOfDeparture>\n                        <dateOfArrival>091213</dateOfArrival>\n                        <timeOfArrival>0745</timeOfArrival>\n                     </productDateTime>\n                     <location>\n                        <locationId>DCA</locationId>\n                        <terminal>B</terminal>\n                     </location>\n                     <location>\n                        <locationId>JFK</locationId>\n                        <terminal>8</terminal>\n                     </location>\n                     <companyId>\n                        <marketingCarrier>AA</marketingCarrier>\n                     </companyId>\n                     <flightOrtrainNumber>3418</flightOrtrainNumber>\n                     <productDetail>\n                        <equipmentType>ERD</equipmentType>\n                     </productDetail>\n                     <addProductDetail>\n                        <electronicTicketing>Y</electronicTicketing>\n                        <productDetailQualifier>AIP</productDetailQualifier>\n                     </addProductDetail>\n                  </flightInformation>\n                  <commercialAgreement>\n                     <codeshareDetails>\n                        <codeShareType>S</codeShareType>\n                        <flightNumber>25</flightNumber>\n                     </codeshareDetails>\n                  </commercialAgreement>\n               </flightDetails>\n            </groupOfFlights>\n            <groupOfFlights>\n               <propFlightGrDetail>\n                  <flightProposal>\n                     <ref>2</ref>\n                  </flightProposal>\n                  <flightProposal>\n                     <ref>0125</ref>\n                     <unitQualifier>EFT</unitQualifier>\n                  </flightProposal>\n                  <flightProposal>\n                     <ref>AA</ref>\n                     <unitQualifier>MCX</unitQualifier>\n                  </flightProposal>\n               </propFlightGrDetail>\n               <flightDetails>\n                  <flightInformation>\n                     <productDateTime>\n                        <dateOfDeparture>091213</dateOfDeparture>\n                        <timeOfDeparture>1700</timeOfDeparture>\n                        <dateOfArrival>091213</dateOfArrival>\n                        <timeOfArrival>1825</timeOfArrival>\n                     </productDateTime>\n                     <location>\n                        <locationId>DCA</locationId>\n                        <terminal>B</terminal>\n                     </location>\n                     <location>\n                        <locationId>JFK</locationId>\n                        <terminal>8</terminal>\n                     </location>\n                     <companyId>\n                        <marketingCarrier>AA</marketingCarrier>\n                     </companyId>\n                     <flightOrtrainNumber>3425</flightOrtrainNumber>\n                     <productDetail>\n                        <equipmentType>CR7</equipmentType>\n                     </productDetail>\n                     <addProductDetail>\n                        <electronicTicketing>Y</electronicTicketing>\n                        <productDetailQualifier>AIP</productDetailQualifier>\n                     </addProductDetail>\n                  </flightInformation>\n                  <commercialAgreement>\n                     <codeshareDetails>\n                        <codeShareType>S</codeShareType>\n                        <flightNumber>25</flightNumber>\n                     </codeshareDetails>\n                  </commercialAgreement>\n               </flightDetails>\n            </groupOfFlights>\n         </flightIndex>\n      </Fare_MasterPricerTravelBoardSearchReply>\n   </soap:Body>\n</soapEnvelope>",
+			"settings":
+			{
+				"buffer_size": 6087,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/views/searches/show.html.erb",
+			"file": "/C/Documents/airports.csv",
 			"settings":
 			{
-				"buffer_size": 55,
-				"line_ending": "Unix"
+				"buffer_size": 63199,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/models/region.rb",
+			"file": "app/models/vacation.rb",
 			"settings":
 			{
-				"buffer_size": 177,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/city_regions/_city_region.html.erb",
-			"settings":
-			{
-				"buffer_size": 67,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/models/city_region.rb",
-			"settings":
-			{
-				"buffer_size": 212,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/models/city.rb",
-			"settings":
-			{
-				"buffer_size": 236,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/layouts/application.html.erb",
-			"settings":
-			{
-				"buffer_size": 687,
+				"buffer_size": 140,
 				"line_ending": "Unix"
 			}
 		}
@@ -160,30 +287,110 @@
 	},
 	"file_history":
 	[
-		"/C/rails/departinggate/app/views/cities/_city.html.erb",
 		"/C/rails/departinggate/app/views/searches/show.html.erb",
+		"/C/Documents/Amadeus/master_pricer_reply.xml",
+		"/C/rails/departinggate/db/migrate/20131209181904_create_flight_details.rb",
+		"/C/rails/departinggate/db/migrate/20131209160923_create_prop_flight_gr_details.rb",
+		"/C/rails/departinggate/db/migrate/20131209155257_create_group_of_flights.rb",
+		"/C/rails/departinggate/app/models/soap_sessions.rb",
+		"/C/rails/departinggate/config/initializers/time_formats.rb",
+		"/C/rails/departinggate/app/helpers/master_pricer_searches_helper.rb",
+		"/C/rails/departinggate/app/helpers/searches_helper.rb",
+		"/C/rails/departinggate/config/locales/validates_timeliness.en.yml",
+		"/C/rails/departinggate/app/views/searches/new.html.erb",
+		"/C/rails/departinggate/app/views/layouts/application.html.erb",
+		"/C/xampp/htdocs/wedding_website/js/jquery.lazylinepainter-1.4.1.js",
+		"/C/Documents/MYSQLDumps/Dump20131127.sql",
+		"/C/rails/departinggate/app/models/airport.rb",
+		"/C/Users/user/Documents/dumps/Dump20131127-1.sql",
+		"/C/rails/departinggate/Gemfile",
+		"/C/rails/departinggate/config/initializers/validates_timeliness.rb",
+		"/C/rails/departinggate/app/controllers/application_controller.rb",
+		"/C/rails/departinggate/app/views/cities/_city.html.erb",
+		"/C/rails/departinggate/app/models/master_pricer_search.rb",
+		"/C/rails/departinggate/app/assets/javascripts/application.js",
+		"/C/rails/departinggate/app/controllers/airports_controller.rb",
+		"/C/rails/departinggate/app/models/city.rb",
+		"/C/rails/departinggate/app/models/search.rb",
+		"/C/rails/departinggate/app/models/city_airport.rb",
+		"/C/rails/departinggate/config/environments/production.rb",
+		"/C/rails/departinggate/config/database.yml",
+		"/C/rails/departinggate/public/assets/manifest.yml",
+		"/C/rails/departinggate/public/assets/application-b76acb3c4c4d4611fea70b3a0854397d.js",
+		"/C/rails/departinggate/config/application.rb",
+		"/C/rails/departinggate/db/migrate/20131121225932_ref_city_airport.rb",
+		"/C/rails/departinggate/db/migrate/20131116002936_create_master_pricer_searches.rb",
+		"/C/rails/departinggate/db/migrate/20130906124511_create_vacations.rb",
+		"/C/rails/departinggate/db/migrate/20131024210005_add_username_to_users.rb",
+		"/C/rails/departinggate/app/models/master_pricer.rb",
+		"/C/rails/departinggate/db/migrate/20131115233112_create_master_pricers.rb",
+		"/C/rails/departinggate/app/helpers/application_helper.rb",
+		"/C/rails/departinggate/config/initializers/amadeus.rb",
+		"/C/Documents/Amadeus/1ASIWDEGDEG_PDT_20131031_233719/Fare_MasterPricerTravelBoardSearchReply_12_4_1A.xsd",
+		"/C/Users/user/Desktop/win_fetch_cacerts.rb",
+		"/C/rails/departinggate/app/views/kaminari/_paginator.html.erb",
+		"/C/rails/departinggate/app/assets/stylesheets/marketing.css",
+		"/C/rails/departinggate/app/assets/javascripts/datepicker-form.js",
+		"/C/rails/departinggate/config/locales/en.yml",
+		"/C/rails/departinggate/app/views/kaminari/_first_page.html.erb",
+		"/C/rails/departinggate/app/assets/javascripts/datepicker-results.js",
+		"/C/rails/departinggate/app/assets/javascripts/searches.js.coffee",
+		"/C/rails/departinggate/config/initializers/devise.rb",
+		"/C/rails/departinggate/db/migrate/20131025215521_add_devise_to_users.rb",
+		"/C/rails/departinggate/app/models/user.rb",
+		"/C/Users/user/AppData/Roaming/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
+		"/C/rails/departinggate/db/migrate/20131022234202_change_origin_to_code_in_searches.rb",
+		"/C/rails/departinggate/app/assets/javascripts/typeahead_airports.js",
+		"/C/rails/departinggate/config/routes.rb",
+		"/C/rails/departinggate/app/assets/stylesheets/application.css",
+		"/C/rails/departinggate/app/assets/stylesheets/twitter-typeahead.css",
+		"/C/rails/departinggate/app/views/searches/closest_airport.json.erb",
+		"/C/rails/departinggate/app/views/static_pages/bootstrap.html.erb",
+		"/C/rails/departinggate/app/assets/stylesheets/bootstrap.css",
 		"/C/rails/departinggate/app/controllers/searches_controller.rb",
+		"/C/rails/departinggate/db/migrate/20131017230503_add_budget_dates_origin_traveller_to_searches.rb",
+		"/C/rails/departinggate/app/assets/javascripts/slider.js",
+		"/C/Source/Web/Development/prototype/root.shtml",
+		"/C/rails/departinggate/app/assets/javascripts/olark.js",
+		"/C/rails/departinggate/app/assets/stylesheets/bootstrap-responsive.css",
+		"/C/rails/departinggate/app/assets/stylesheets/datepicker.css",
+		"/C/rails/departinggate/app/assets/stylesheets/static_pages.css.scss",
+		"/C/rails/departinggate/app/assets/javascripts/jquery-ui.js",
+		"/C/rails/departinggate/app/assets/javascripts/jquery-1.9.1.js",
+		"/C/rails/departinggate/app/assets/javascripts/jquery.min.js",
+		"/C/rails/departinggate/app/assets/stylesheets/jquery-ui.css",
+		"/C/rails/departinggate/app/assets/stylesheets/users.css.scss",
+		"/C/rails/departinggate/app/assets/stylesheets/sessions.css.scss",
+		"/C/rails/departinggate/app/assets/javascripts/datepicker.js",
+		"/C/rails/departinggate/app/helpers/cities_helper.rb",
+		"/C/rails/departinggate/config/initializers/will_paginate_array.rb",
+		"/C/rails/departinggate/script/cities.rb",
+		"/C/rails/departinggate/app/views/searches/_search.html.erb",
+		"/C/rails/departinggate/vendor/assets/javascripts/morris.js",
+		"/C/rails/departinggate/vendor/assets/javascripts/raphael.js",
+		"/C/rails/departinggate/app/views/searches/index.html.erb",
+		"/C/rails/departinggate/app/models/city_vacation.rb",
+		"/C/rails/departinggate/config/initializers/inflections.rb",
+		"/C/rails/departinggate/config/initializers/backtrace_silencers.rb",
+		"/C/rails/departinggate/config/initializers/session_store.rb",
+		"/C/rails/departinggate/app/models/city_region.rb",
+		"/C/rails/departinggate/app/views/city_regions/_city_region.html.erb",
+		"/C/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/activerecord-3.2.3/lib/active_record/attribute_methods.rb",
+		"/C/rails/departinggate/app/models/region.rb",
 		"/C/rails/departinggate/app/views/cities/show.html.erb",
 		"/C/rails/departinggate/app/views/city_regions/show.html.erb",
 		"/C/rails/departinggate/app/views/city_regions/_city.html.erb",
-		"/C/rails/departinggate/app/views/searches/new.html.erb",
 		"/C/rails/departinggate/app/views/cities/_cities.html.erb",
-		"/C/rails/departinggate/app/models/region.rb",
 		"/C/rails/sample_app/config/routes.rb",
-		"/C/rails/departinggate/app/models/user.rb",
 		"/C/rails/departinggate/db/migrate/20130804165954_create_users.rb",
 		"/C/rails/departinggate/db/migrate/20130818233744_airports.rb",
 		"/C/rails/departinggate/app/models/vacation.rb",
-		"/C/rails/departinggate/app/models/city.rb",
-		"/C/rails/departinggate/Gemfile",
 		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/layouts/application.html.erb",
 		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/products/_product.html.erb",
 		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/products/index.html.erb",
 		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/searches/show.html.erb",
 		"/C/Users/user/AppData/Local/Temp/Temp1_111-advanced-search-form-revised.zip/111-advanced-search-form-revised/store-after/app/views/searches/new.html.erb",
 		"/C/rails/sample_app/app/views/layouts/application.html.erb",
-		"/C/rails/departinggate/app/controllers/application_controller.rb",
-		"/C/rails/departinggate/config/routes.rb",
 		"/C/rails/departinggate/db/migrate/20130829000105_ref_city_region.rb",
 		"/C/rails/departinggate/db/migrate/20130829001706_ref_city_fk.rb",
 		"/C/rails/departinggate/db/migrate/20130829234612_city_vacation.rb",
@@ -192,7 +399,6 @@
 		"/C/rails/departinggate/db/seeds.rb",
 		"/C/rails/departinggate/db/migrate/20130817033605_schema.rb",
 		"/C/rails/departinggate/db/schema.rb",
-		"/C/rails/departinggate/config/database.yml",
 		"/C/rails/mysql_test/config/database.yml",
 		"/C/rails/mysql_test/Gemfile",
 		"/C/rails/mysql_test/app/controllers/ids_controller.rb",
@@ -203,77 +409,23 @@
 		"/C/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/mysql2-0.3.11-x86-mingw32/lib/mysql2/mysql2.rb",
 		"/C/rails/sample_app/app/controllers/static_pages_controller.rb",
 		"/C/rails/departinggate/app/controllers/static_pages_controller.rb",
-		"/C/Source/Web/Development/prototype/root.shtml",
 		"/C/rails/sample_app/app/views/static_pages/prototype.html.erb",
 		"/C/Documents/travel_data.sql",
 		"/C/rails/departinggate/config/environment.rb",
 		"/C/rails/departinggate/db/migrate/20130815233325_initial_structure.rb",
 		"/C/rails/departinggate/db/development.sqlite3",
-		"/C/rails/departinggate/README.md",
-		"/C/rails/departinggate/app/controllers/users_controller.rb",
-		"/C/rails/sample_app/app/views/users/new.html.erb",
-		"/C/rails/sample_app/app/views/static_pages/home.html.erb",
-		"/C/Source/Web/Development/index.shtml",
-		"/C/rails/sample_app/app/assets/javascripts/jquery-1.9.1.js",
-		"/C/rails/sample_app/app/assets/javascripts/jquery-ui.js",
-		"/C/rails/sample_app/app/assets/images/DSC_2186.JPG",
-		"/C/rails/sample_app/app/views/sessions/new.html.erb",
-		"/C/rails/sample_app/app/assets/stylesheets/navbar.css",
-		"/C/rails/sample_app/app/views/navbar.html.erb",
-		"/C/rails/sample_app/app/assets/stylesheets/static_pages.css.scss",
-		"/C/rails/sample_app/app/assets/stylesheets/application.css",
-		"/C/rails/sample_app/app/assets/stylesheets/sessions.css.scss",
-		"/C/rails/sample_app/app/views/static_pages/job.html.erb",
-		"/C/rails/sample_app/app/views/static_pages/faq.html.erb",
-		"/C/rails/sample_app/app/views/static_pages/follow.html.erb",
-		"/C/rails/sample_app/app/controllers/application_controller.rb",
-		"/C/rails/sample_app/app/controllers/users_controller.rb",
-		"/C/rails/sample_app/app/models/user.rb",
-		"/C/rails/sample_app/app/helpers/application_helper.rb",
-		"/C/rails/sample_app/app/helpers/sessions_helper.rb",
-		"/C/rails/sample_app/app/helpers/users_helper.rb",
-		"/C/rails/sample_app/app/helpers/static_pages_helper.rb",
-		"/C/Documents/Amadeus/WSDL/1ASIWPOC1A_PDT_20130802_230808.wsdl",
-		"/C/rails/sample_app/app/views/bootstrap-nav.css.scss",
-		"/C/rails/sample_app/app/controllers/sessions_controller.rb",
-		"/C/rails/sample_app/Gemfile",
-		"/C/Source/Web/Development/prototype/nav.inc",
-		"/C/rails/sample_app/app/assets/stylesheets/bootstrap.css",
-		"/C/rails/sample_app/app/views/static_pages/olark.html.erb",
-		"/C/Source/Web/Development/prototype/footer.inc",
-		"/C/rails/sample_app/app/assets/stylesheets/application.css.scss",
-		"/C/rails/sample_app/lib/assets/application.css.scss",
-		"/C/rails/sample_app/app/assets/javascripts/application.js",
-		"/C/rails/sample_app/app/views/static_pages/about.html.erb",
-		"/C/rails/sample_app/app/views/static_pages/help.html.erb",
-		"/C/rails/sample_app/Gemfile.lock",
-		"/C/rails/sample_app/spec/requests/static_pages_spec.rb",
-		"/C/rails/sample_app/app/views/static_pages/about.html",
-		"/C/rails/sample_app/public/hello.html",
-		"/C/rails/sample_app/public/index.html",
-		"/C/rails/sample_app/README.rdoc",
-		"/C/rails/demo_app/app/models/user.rb",
-		"/C/rails/demo_app/app/models/micropost.rb",
-		"/C/rails/demo_app/config/database.yml",
-		"/C/rails/demo_app/Gemfile",
-		"/C/rails/demo_app/db/migrate/20130720151138_create_users.rb",
-		"/C/rails/demo_app/db/migrate/20130720151258_create_users.rb",
-		"/C/rails/demo_app/config/routes.rb",
-		"/C/rails/demo_app/app/controllers/users_controller.rb",
-		"/C/rails/first_app/Gemfile",
-		"/C/rails/first_app/README.md",
-		"/C/rails/first_app/.gitignore",
-		"/C/Users/user/AppData/Roaming/Sublime Text 2/Packages/User/Ruby on Rails.sublime-settings"
+		"/C/rails/departinggate/README.md"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -281,6 +433,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			":db",
+			"html_op",
+			"after",
+			"closest_airport",
+			" remote_ip",
+			"if",
+			"SoapSessions",
+			"icon",
+			"offset",
+			".\n",
+			"paginate",
 			"multi",
 			"date"
 		],
@@ -300,183 +463,23 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/models/search.rb",
+					"file": "app/controllers/searches_controller.rb",
 					"settings":
 					{
-						"buffer_size": 614,
+						"buffer_size": 766,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								240,
-								240
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 1.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "script/cities.rb",
-					"settings":
-					{
-						"buffer_size": 419,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								419,
-								419
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/views/searches/show.html.erb",
-					"settings":
-					{
-						"buffer_size": 55,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								48,
-								48
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/models/region.rb",
-					"settings":
-					{
-						"buffer_size": 177,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								164,
-								164
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/views/city_regions/_city_region.html.erb",
-					"settings":
-					{
-						"buffer_size": 67,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								29,
-								29
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/models/city_region.rb",
-					"settings":
-					{
-						"buffer_size": 212,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								212,
-								212
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/models/city.rb",
-					"settings":
-					{
-						"buffer_size": 236,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								166,
-								166
+								312,
+								312
 							]
 						],
 						"settings":
@@ -491,24 +494,159 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "app/views/layouts/application.html.erb",
+					"buffer": 1,
+					"file": "app/models/search.rb",
 					"settings":
 					{
-						"buffer_size": 687,
+						"buffer_size": 2761,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								214,
-								214
+								118,
+								128
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/helpers/application_helper.rb",
+					"settings":
+					{
+						"buffer_size": 200,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								152,
+								152
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/models/master_pricer_search.rb",
+					"settings":
+					{
+						"buffer_size": 2833,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2828,
+								2828
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1174.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"settings":
+					{
+						"buffer_size": 6087,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								806,
+								806
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Documents/airports.csv",
+					"settings":
+					{
+						"buffer_size": 63199,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/models/vacation.rb",
+					"settings":
+					{
+						"buffer_size": 140,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								71,
+								53
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -525,7 +663,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
