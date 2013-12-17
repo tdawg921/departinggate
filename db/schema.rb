@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209181904) do
+ActiveRecord::Schema.define(:version => 20131217000807) do
 
   create_table "address", :primary_key => "Address_ID", :force => true do |t|
     t.string  "Street_1", :limit => 100
@@ -85,6 +85,19 @@ ActiveRecord::Schema.define(:version => 20131209181904) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "fare_details", :force => true do |t|
+    t.integer "recommendation_id"
+    t.integer "segment_ref"
+    t.string  "rbd"
+    t.string  "cabin"
+    t.string  "avl_status"
+    t.string  "fare_basis"
+    t.string  "passenger_type"
+    t.string  "fare_type"
+    t.string  "breakpoint"
+    t.string  "booking_class_details"
+  end
+
   create_table "flight_details", :force => true do |t|
     t.integer  "group_of_flights_id"
     t.date     "date_of_departure"
@@ -105,6 +118,12 @@ ActiveRecord::Schema.define(:version => 20131209181904) do
     t.datetime "updated_at",               :null => false
   end
 
+  create_table "flight_recommendations", :force => true do |t|
+    t.integer "recommendation_id"
+    t.integer "flight_details_id_out"
+    t.integer "flight_details_id_in"
+  end
+
   create_table "group_of_flights", :force => true do |t|
     t.integer  "search_id"
     t.integer  "flight_proposal"
@@ -114,9 +133,9 @@ ActiveRecord::Schema.define(:version => 20131209181904) do
 
   create_table "master_pricer_searches", :force => true do |t|
     t.integer  "search_id"
-    t.string   "xml"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.binary   "xml",        :limit => 2147483647
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "name_demographic", :primary_key => "Name_ID", :force => true do |t|
@@ -136,12 +155,30 @@ ActiveRecord::Schema.define(:version => 20131209181904) do
     t.integer "Name_ID"
   end
 
+  create_table "pricing_message", :force => true do |t|
+    t.integer "recommendation_id_id"
+    t.string  "text_subject_qualifier"
+    t.string  "information_type"
+    t.string  "description"
+  end
+
   create_table "prop_flight_gr_details", :force => true do |t|
     t.integer  "group_of_flights_id"
     t.string   "ref"
     t.string   "unit_qualifier"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "recommendations", :force => true do |t|
+    t.integer  "search_id"
+    t.integer  "item_number_id"
+    t.string   "fare"
+    t.string   "taxes"
+    t.string   "transport_stage_qualifier"
+    t.string   "company"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "ref_airport", :force => true do |t|

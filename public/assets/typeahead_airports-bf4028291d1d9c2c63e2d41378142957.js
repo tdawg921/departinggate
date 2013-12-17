@@ -1,1 +1,0 @@
-$(function(){$("#search_origin").typeahead({name:"search[origin]",prefetch:"../airports.json"})});
