@@ -310,27 +310,21 @@ ActiveRecord::Schema.define(:version => 20131217000807) do
   end
 
   create_table "user_data", :primary_key => "User_ID", :force => true do |t|
-    t.integer "Party_Group_ID"
-    t.integer "Name_ID",                         :null => false
-    t.string  "Email_Address",     :limit => 45, :null => false
-    t.integer "Home_City"
-    t.string  "Home_Airport",      :limit => 5
-    t.integer "Address_ID"
-    t.string  "Dest_Pref_Reg",     :limit => 45
-    t.string  "Dest_Airport_Pref", :limit => 5
-    t.string  "Telephone_1",       :limit => 45
-    t.string  "Telephone_2",       :limit => 45
-    t.string  "Flight_Class_Pref", :limit => 45
-    t.string  "Hotel_Bed_Pref",    :limit => 45
-    t.string  "Hotel_Smoke_Pref",  :limit => 1
-    t.string  "Hotel_Class_Pref",  :limit => 45
-    t.string  "Car_Size_Pref",     :limit => 2
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "name_suffix"
+    t.string "gender"
+    t.date   "birthday"
+    t.string "home_phone"
+    t.string "work_phone"
+    t.string "mobile_phone"
+    t.string "language_preference"
+    t.string "home_airport"
+    t.string "seat_preference"
+    t.string "meal_preference"
+    t.string "special_request_preference"
   end
-
-  add_index "user_data", ["Dest_Airport_Pref"], :name => "fk_Dest_Airport_Pref_idx"
-  add_index "user_data", ["Home_Airport"], :name => "fk_Home_airport_idx"
-  add_index "user_data", ["Name_ID"], :name => "fk_Name_ID_idx"
-  add_index "user_data", ["Party_Group_ID"], :name => "fk_User_data_Party_Group_ID_idx"
 
   create_table "users", :force => true do |t|
     t.string   "email"

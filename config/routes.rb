@@ -1,12 +1,13 @@
 SampleApp::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
+  resource :user, :has_one => :user_data
 
   resources :searches
   resources :airports
 
   get 'bootstrap', to: "static_pages#bootstrap"
 
-  root to: 'static_pages#home'
+  root to: 'searches#new'
 
   get "static_pages/home"
   get 'help', to: "static_pages#help"
