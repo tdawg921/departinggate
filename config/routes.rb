@@ -1,6 +1,6 @@
 SampleApp::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
-  resource :user, :has_one => :user_data
+  resource :user, :has_one => :user_profile
 
   resources :searches
   resources :airports

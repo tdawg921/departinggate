@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131217000807) do
+ActiveRecord::Schema.define(:version => 20131219145310) do
 
   create_table "address", :primary_key => "Address_ID", :force => true do |t|
     t.string  "Street_1", :limit => 100
@@ -133,9 +133,9 @@ ActiveRecord::Schema.define(:version => 20131217000807) do
 
   create_table "master_pricer_searches", :force => true do |t|
     t.integer  "search_id"
-    t.binary   "xml",        :limit => 2147483647
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.string   "xml"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "name_demographic", :primary_key => "Name_ID", :force => true do |t|
@@ -202,9 +202,9 @@ ActiveRecord::Schema.define(:version => 20131217000807) do
   create_table "ref_city_airport", :force => true do |t|
     t.integer  "city_id"
     t.string   "airport_code"
-    t.string   "primary",      :limit => 45
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.string   "primary"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "ref_city_region", :force => true do |t|
@@ -309,28 +309,28 @@ ActiveRecord::Schema.define(:version => 20131217000807) do
     t.datetime "updated_at",     :null => false
   end
 
-  create_table "user_data", :primary_key => "User_ID", :force => true do |t|
-    t.string "first_name"
-    t.string "middle_name"
-    t.string "last_name"
-    t.string "name_suffix"
-    t.string "gender"
-    t.date   "birthday"
-    t.string "home_phone"
-    t.string "work_phone"
-    t.string "mobile_phone"
-    t.string "language_preference"
-    t.string "home_airport"
-    t.string "seat_preference"
-    t.string "meal_preference"
-    t.string "special_request_preference"
+  create_table "user_profile", :force => true do |t|
+    t.integer "user_id"
+    t.string  "first_name"
+    t.string  "middle_name"
+    t.string  "last_name"
+    t.string  "name_suffix"
+    t.string  "gender"
+    t.date    "birthday"
+    t.string  "home_phone"
+    t.string  "work_phone"
+    t.string  "mobile_phone"
+    t.string  "language_preference"
+    t.string  "home_airport"
+    t.string  "seat_preference"
+    t.string  "meal_preference"
+    t.string  "special_request_preference"
   end
 
   create_table "users", :force => true do |t|
     t.string   "email"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "username"
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -340,21 +340,11 @@ ActiveRecord::Schema.define(:version => 20131217000807) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",        :default => 0
-    t.string   "unlock_token"
-    t.datetime "locked_at"
-    t.string   "authentication_token"
+    t.string   "username"
   end
 
-  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
   create_table "vacations", :force => true do |t|
     t.datetime "created_at", :null => false

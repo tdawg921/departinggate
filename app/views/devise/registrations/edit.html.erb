@@ -1,4 +1,22 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+$(function() {
+  $( "#datepicker" ).datepicker({
+    minDate: -50000, 
+    maxDate: 0,
+    changeMonth: true,
+    changeYear: true
+  });
+});
+</script> 
+
+<h2>Edit Profile</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= devise_error_messages! %>
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -10,72 +28,89 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse in">
       <div class="panel-body">
-        <%= resource.user_data || resource.build_user_data %>
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-          <%= devise_error_messages! %>
 
-          <div><%= f.label :email %><br />
-            <%= f.email_field :email, :autofocus => true %>
-          </div>
+        <div><%= f.label :email %><br />
+          <%= f.email_field :email, :autofocus => true %>
+        </div>
 
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div>
-              Currently waiting confirmation for: <%= resource.unconfirmed_email %>
-            </div>
-          <% end %>
-
-          <div><%= f.label :username %>
-            <br />
-            <%= f.email_field :username %>
-          </div>
-
-
-          <%= fields_for :user_data do |u| %>
-            <h2>Hello</h2>
-            <div>
-              <%= u.label :first_name %><br />
-              <%= u.text_field :first_name %>
-            </div>
-          <% end %>
-
-            <div>
-              <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-              <%= f.password_field :password, :autocomplete => "off" %>
-            </div>
-
-            <div><%= f.label :password_confirmation %><br />
-              <%= f.password_field :password_confirmation %>
-            </div>
-
-            <div>
-              <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-              <%= f.password_field :current_password %>
-            </div>
-          </div>
-                
-
-          <div>
-            <%= f.submit "Update" %>
-          </div>
-                
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>
+          Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+        </div>
         <% end %>
 
-        <h3>Cancel my account</h3>
+        <div><%= f.label :username %>
+          <br />
+          <%= f.email_field :username %>
+        </div>
 
-        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+        <div>
+          <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+          <%= f.password_field :password, :autocomplete => "off" %>
+        </div>
+
+        <div><%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation %>
+        </div>
+
+        <div>
+          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+          <%= f.password_field :current_password %>
+        </div>       
+      </div>
     </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-          Collapsible Group Item #2
+          Personal Information
         </a>
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse">
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        <%= f.fields_for :user_profile do |u| %>
+        <div class="row">
+          <div class="col-lg-2">
+            <%= u.label :first_name %><br />
+            <%= u.text_field :first_name %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-2">
+            <%= u.label :middle_name %><br />
+            <%= u.text_field :middle_name %>
+          </div>
+        </div>
+        <div>
+          <%= u.label :last_name %><br />
+          <%= u.text_field :last_name %>
+        </div>
+        <div class="row">
+          <br />
+          <div class="col-lg-2">
+            <%= u.label "Suffix" %>
+            <%= u.select :name_suffix, options_for_select([ "", "Jr.", "Sr." ], :selected => u.object.name_suffix), options={},
+            html_options = {class: "form-control"} %> 
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-2">
+            <%= u.label "Gender" %>
+            <%= u.select :gender, options_for_select([ "", "M", "F" ], :selected => u.object.gender), options={},
+            html_options = {class: "form-control"} %> 
+          </div>
+        </div>
+        <div class="row">
+          <br />
+          <div class="col-lg-2">
+            <%= u.label "Birthday" %>
+            <%= u.text_field :birthday_text, :id => "datepicker", :class=>"datepicker input-small form-control" %>
+          </div>
+        </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -83,22 +118,93 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-          Collapsible Group Item #3
+          Contact Information
         </a>
       </h4>
     </div>
     <div id="collapseThree" class="panel-collapse collapse">
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        <%= f.fields_for :user_profile do |u| %>
+        <div>
+          <%= u.label :home_phone %><br />
+          <%= u.text_field :home_phone %>
+        </div>
+        <div>
+          <%= u.label :work_phone %><br />
+          <%= u.text_field :work_phone %>
+        </div>
+        <div>
+          <%= u.label :mobile_phone %><br />
+          <%= u.text_field :mobile_phone %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+          Preferences
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse">
+      <div class="panel-body">
+        <%= f.fields_for :user_profile do |u| %>
+        <div class="row">
+          <div class="col-lg-2">
+            <%= u.label "Language Preference" %>
+            <%= u.select :language_preference, options_for_select([ "", "English" ], :selected => u.object.language_preference), options={},
+            html_options = {class: "form-control"} %> 
+          </div>
+        </div>
+        <div class="row">
+          <br />
+          <div class="col-lg-2">
+            <%= u.label :home_airport %><br />
+            <%= u.text_field :home_airport %>
+          </div>
+        </div>
+        <div class="row">
+          <br />
+          <div class="col-lg-2">
+            <%= u.label "Seat Preference" %>
+            <%= u.select :seat_preference, options_for_select([ "", "Window", "Aisle", "Middle" ], :selected => u.object.seat_preference), options={},
+            html_options = {class: "form-control"} %> 
+          </div>
+        </div>
+        <div class="row">
+          <br />
+          <div class="col-lg-2">
+            <%= u.label "Meal Preference" %>
+            <%= u.select :meal_preference, options_for_select([ "", "None", "Vegetarian", "Vegan", "Kosher", "Gluten Free" ], :selected => u.object.meal_preference), options={},
+            html_options = {class: "form-control"} %> 
+          </div>
+        </div> 
+        <div class="row">
+          <br />
+          <div class="col-lg-2">
+            <%= u.label "Special Request" %>
+            <%= u.select :special_request_preference, options_for_select([ "", "Deaf", "Blind", "Wheelchair" ], :selected => u.object.special_request_preference), options={},
+            html_options = {class: "form-control"} %> 
+          </div>
+        </div> 
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+<div>
+  <%= f.submit "Update" %>
+</div>
 
-      <%= link_to "Back", :back %>
+<% end %>
+<%= link_to "Back", :back %>
 
-      <script>
-      $('#accordion').on('show.bs.collapse', function () {
-       $('#accordion .in').collapse('hide');
-     });
-      </script>
+<!-- Code below causes all other collapsible accordion panels to collapse when one is expanded -->
+<script>
+$('#accordion').on('show.bs.collapse', function () {
+ $('#accordion .in').collapse('hide');
+});
+</script>
